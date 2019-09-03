@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GUI xmlns="GUI"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="GUIServer.xsd">
+	<Version>0.0.1</Version>
+	<SessionId></SessionId>
+	<Type>
+		<Exit />
+	</Type>
+</GUI>

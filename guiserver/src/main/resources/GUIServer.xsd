@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="GUI" targetNamespace="GUI"
+	elementFormDefault="qualified">
+	<xs:element name="GUI">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Version" type="xs:string" minOccurs="1" maxOccurs="1" />
+				<xs:element name="SessionId" type="xs:string" minOccurs="1" maxOccurs="1" />
+				<xs:element name="Type" type="GUIType" minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GUIType">
+		<xs:choice>
+			<xs:element name="InitialGUI" type="InitialGUIType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="ChangeGUI" type="ChangeGUIType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Exit" minOccurs="1" maxOccurs="1" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="InitialGUIType">
+		<xs:sequence>
+			<xs:element name="Windows" type="WindowsType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WindowsType">
+		<xs:sequence>
+			<xs:element name="Window" type="WindowType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WindowType">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Title" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Position" type="PositionType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Elemente" type="ElementeType" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangeGUIType">
+		<xs:sequence>
+			<xs:element name="Operation" type="OperationType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OperationType">
+		<xs:choice>
+			<xs:element name="AddWindow" type="AddWindowType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="AddElement" type="AddElementType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="RemoveWindow" type="RemoveWindowType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="RemoveElement" type="RemoveElementType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="ChangeElement" type="ChangeElementType" minOccurs="1" maxOccurs="1" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="AddWindowType">
+		<xs:sequence>
+			<xs:sequence>
+				<xs:element name="Window" type="WindowType" minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddElementType">
+		<xs:sequence>
+			<xs:element name="WindowID" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Element" type="ElementType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RemoveWindowType">
+		<xs:sequence>
+			<xs:element name="WindowID" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RemoveElementType">
+		<xs:sequence>
+			<xs:element name="WindowID" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="ElementID" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangeElementType">
+		<xs:sequence>
+			<xs:element name="WindowID" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="ElementID" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Operation" type="ElementOperationType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ElementOperationType">
+		<xs:choice>
+			<xs:element name="ChangeState" type="ChangeStateType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Reload" type="ReloadType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Event" type="Event" minOccurs="1" maxOccurs="1" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ChangeStateType">
+		<xs:sequence>
+			<xs:element name="State" type="StateType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReloadType">
+		<xs:sequence>
+			<xs:element name="View" type="ViewType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Image" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Position" type="PositionType" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ViewType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Active" />
+			<xs:enumeration value="Inactive" />
+			<xs:enumeration value="MouseOver" />
+			<xs:enumeration value="Pressed" />
+			<xs:enumeration value="Dragged" />
+			<xs:enumeration value="ActiveDeselected" />
+			<xs:enumeration value="ActiveSelected" />
+			<xs:enumeration value="ActiveDeselectedMouseOver" />
+			<xs:enumeration value="ActiveSelectedMouseOver" />
+			<xs:enumeration value="InactiveDeselected" />
+			<xs:enumeration value="InactiveSelected" />
+			<xs:enumeration value="Focus" />
+			<xs:enumeration value="ActiveMouseOver" />
+			<xs:enumeration value="FocusMouseOver" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PositionType">
+		<xs:sequence>
+			<xs:element name="X-Position" type="xs:integer" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Y-Position" type="xs:integer" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Width" type="xs:integer" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Height" type="xs:integer" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ElementeType">
+		<xs:sequence>
+			<xs:element name="Element" type="ElementType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ElementType">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Ebene" type="xs:integer" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Zeichnungsnummer" type="xs:integer" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Position" type="PositionType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Elementtyp" type="ElementtypType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Opacity" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Event" type="Event" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ElementtypType">
+		<xs:choice>
+			<xs:element name="Content" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Button" type="ButtonType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Select" type="SelectType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Klick" type="KlickType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Slider" type="SliderType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="TextInput" type="TextInputType" minOccurs="1" maxOccurs="1" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="SourceType">
+		<xs:choice>
+			<xs:element name="URL" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="File" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="HtmlBase64" type="xs:base64Binary" minOccurs="1" maxOccurs="1" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="HtmlInputType">
+		<xs:sequence>
+			<xs:element name="BeforeBase64" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="AfterBase64" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ButtonType">
+		<xs:sequence>
+			<xs:element name="ActiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InactiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="MouseOverImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="PressedImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="StartState" type="StateType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SelectType">
+		<xs:sequence>
+			<xs:element name="ActiveDeselectedImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="ActiveSelectedImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="ActiveDeselectedMouseOverImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="ActiveSelectedMouseOverImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InactiveDeselectedImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InactiveSelectedImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="StartState" type="StateType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KlickType">
+		<xs:sequence>
+			<xs:element name="ActiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InactiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="MouseOverImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="StartState" type="StateType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SliderType">
+		<xs:sequence>
+			<xs:element name="ActiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InactiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="MouseOverImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="DraggedImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="StartState" type="StateType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="X" type="SliderDraggType" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Y" type="SliderDraggType" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SliderDraggType">
+		<xs:sequence>
+			<xs:element name="RangePlus" type="xs:integer" minOccurs="1" maxOccurs="1" />
+			<xs:element name="RangeMinus" type="xs:integer" minOccurs="1" maxOccurs="1" />
+			<xs:element name="StepSize" type="xs:integer" minOccurs="1" maxOccurs="1" />
+			<xs:element name="MoveCount" type="xs:integer" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TextInputType">
+		<xs:sequence>
+			<xs:element name="ActiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InactiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="FocusImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="MouseOverActiveImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="MouseOverFocusImage" type="SourceType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InputActive" type="HtmlInputType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InputInactive" type="HtmlInputType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InputFocus" type="HtmlInputType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InputMouseOverActive" type="HtmlInputType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="InputMouseOverFocus" type="HtmlInputType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="CharacterCount" type="xs:integer" minOccurs="0" maxOccurs="1" />
+			<xs:element name="StartState" type="StateType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Cursor" type="xs:base64Binary" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Event">
+		<xs:attribute name="Type" type="EventtypType" use="required" />
+		<xs:attribute name="active" type="xs:boolean" use="required" />
+	</xs:complexType>
+	<xs:simpleType name="StateType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Active" />
+			<xs:enumeration value="Inactive" />
+			<xs:enumeration value="ActiveDeselected" />
+			<xs:enumeration value="ActiveSelected" />
+			<xs:enumeration value="InactiveDeselected" />
+			<xs:enumeration value="InactiveSelected" />
+			<xs:enumeration value="Focus" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EventtypType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Entered" />
+			<xs:enumeration value="Exited" />
+			<xs:enumeration value="Moved" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UrlType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="https://[a-zA-Z]*" /> <!-- Hier noch genauer spezifizieren -->
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

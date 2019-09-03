@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GUI xmlns="GUI"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="GUIServer.xsd">
+	<Version>1.0.0</Version>
+	<SessionId></SessionId>
+	<Type>
+		<ChangeGUI>
+			<Operation>
+				<ChangeElement>
+					<WindowID>window2</WindowID>
+					<ElementID>element1</ElementID>
+					<Operation>
+						<Reload>
+							<View>Active</View>
+							<Image>
+								<URL>http://localhost:8080/CASS/GuiElementSeiten/ButtonActiveReload.html</URL>
+							</Image>
+						</Reload>
+					</Operation>
+				</ChangeElement>
+			</Operation>
+		</ChangeGUI>
+	</Type>
+</GUI>

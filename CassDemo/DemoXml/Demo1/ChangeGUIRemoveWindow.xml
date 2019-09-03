@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GUI xmlns="GUI"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="GUIServer.xsd">
+	<Version>1.0.0</Version>
+	<SessionId></SessionId>
+	<Type>
+		<ChangeGUI>
+			<Operation>
+				<RemoveWindow>
+					<WindowID>window3</WindowID>
+				</RemoveWindow>
+			</Operation>
+		</ChangeGUI>
+	</Type>
+</GUI>

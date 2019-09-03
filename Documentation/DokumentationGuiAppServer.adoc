@@ -1,0 +1,29 @@
+= Dokumentation GuiAppServer
+:doctype: book
+:encoding: utf-8
+:lang: de
+
+[[chap_Einleitung]]
+== Einleitung
+Der GuiAppServer stellt die Verbindung zwischen den Anwendungen mit Gui und den Clients her. Beim Start wird eine Datei (Option appsfile) mit Zuordnungen von Anwendungsnamen zu Anwendungen gelesen. Zu jeder von diesen Anwendungen wird jeweils eine Verbindung hergestellt.
+
+[[chap_AufbauAppsfile]]
+== Aufbau Appsfile
+Der Aufbau ist <Anwendungsname>":ws://"<Domain/IP>":"<Port>
+
+[[chap_AblaufProAnwendung]]
+== Ablauf pro Anwendung
+Senden von Daten vom Client beginnend mit "app:1.0.0:name:"<Anwendungsname> führt zur Erzeugung einer SessionId für die entsprechende Anwendung und Senden von "init:"<SessionId>":"<Breite>":<Höhe> zur jeweiligen Anwendung.
+Senden von Daten vom Client beginnend mit "app:1.0.0:session:" werden zur entsprechenden Anwendung weitergeleitet.
+
+[[chap_Start]]
+== Start
+Der GuiAppServer wird unter Windows mit "win\jre1.8.0_73\bin\java -jar GuiAppServer-jar-with-dependencies.jar" gestartet, unter Mac mit "mac\jre1.8.0_73\bin\java -jar GuiAppServer-jar-with-dependencies.jar".
+Als Kommandozeilenparameter sind "-host", "-port" und -appsfile für den GuiAppServer möglich.
+Der Default für Host ist "localhost", der Default für Port ist "77".
+Für den Parameter -appsfile ist eine Datei mit einer Zuordnung von Anwendungsnamen zu Domain/IP mit Port anzugeben.
+
+[[chap_VorgeseheneErweiterungen]]
+== Vorgesehene Erweiterungen
+* Konfiguration zur Laufzeit für weitere Zuordnungen von Anwendungen zu Domain/IP und Port
+* Verbindung zu Anwendungen auch zur Laufzeit möglich möglich

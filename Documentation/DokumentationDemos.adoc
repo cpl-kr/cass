@@ -1,0 +1,9 @@
+= Dokumentation Demoanwendungen
+:doctype: book
+:encoding: utf-8
+:lang: de
+
+Die Demoanwendungen zeigen die Verwendung des GuiServers, einmal als Client auf dem selben Rechner, einmal als Remoteanwendung über den GuiAppServer.
+Das Paket _de.platen.cass.app.event_ zeigt die gemeinsame Behandlung des Event-Mechanismus für Server und Client.
+Das Paket _de.platen.cass.app.event.client_ zeigt die Schnittstelle zur Ereignisbehandlung des GuiServers für eine Clientanwendung.
+Das Paket _de.platen.cass.app.event.server_ zeigt die Schnittstelle zur Ereignisbehandlung des GuiServers für eine Serveranwendung.

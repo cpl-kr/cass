@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Active Deselected</title>
+<style>
+body {
+    margin: 0px;
+    padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+  table, th, td  {border: 0px solid black; border-spacing: 0px;}
+  th, td         {padding: 0px;}
+  #tabelle       {background-color: #8a9da8;}
+  #spaltengruppe {background-color: #df6c20;}
+  #spalte        {background-color: #5c82d9;}
+  #zeilengruppe  {background-color: #8db243; color: #ffffff;}
+  #zeile         {background-color: #e7c157;}
+  #zelle         {background-color: #bbbbbb;}
+
+.select-text {
+  text-align: center;
+  position: absolute;
+  top: 25px;
+  left: 75px;
+  color: black;
+}
+
+</style>
+  </head>
+  <body>
+<table id="tabelle" width="100%">
+	<tr>
+		<td id="zelle" style="height: 50px;"><img src="http://localhost:8080/CASS/GuiElementSeiten/Select/SelectOffMarker.png" alt="" border=0 height=50 width=50/></td>
+		<td class="select-text">Deselect</td>
+	</tr>
+</table>
+  </body>
+</html>

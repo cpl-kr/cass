@@ -1,0 +1,25 @@
+= Dokumentation GuiAdapter
+:doctype: book
+:encoding: utf-8
+:lang: de
+
+[[chap_Einleitung]]
+== Einleitung
+Der GuiAdapter dient zum Aufruf einer Anwendung der Form "app:"<Domain/IP":"<Port>":"<Anwedungsname> oder "app:"<Domain/IP":<Anwedungsname>, wobei der Anwendungsname Leerzeichen und Umlaue enthalten darf.
+Die Zeichensatzkodierung ist UTF-8.
+Nach Eingabe von Return wird die Anwendung aufgerufen, deren Daten werden zum GuiServer geleitet werden.
+Die Ereignisse der Anwendung werden zur Anwendung zurückgesendet.
+
+[[chap_Start]]
+== Start
+Der GuiAdapter wird unter Windows mit "win\jre1.8.0_73\bin\java -jar GuiAdapter-jar-with-dependencies.jar" gestartet, unter Mac mit "mac\jre1.8.0_73\bin\java -jar GuiAdapter-jar-with-dependencies.jar".
+Als Kommandozeilenparameter sind "-host" und "-port" für den GuiServer möglich.
+Der Default für Host ist "localhost", der Default für Port ist "7777".
+
+[[chap_VorgeseheneErweiterungen]]
+== Vorgesehene Erweiterungen
+* Favoriten
+* Einstellungen (Domain/IP und Port des GuiServers)
+* Nutzung des Dateisystems (durch FTP)
+* Auslagerung von Server-Kode in Docker Container
+* Analog zum GuiAdapter andere Resourcenadapter für Audio, Video, Print, Dateisystem

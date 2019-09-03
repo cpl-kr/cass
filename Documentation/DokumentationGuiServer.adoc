@@ -1,0 +1,98 @@
+= Dokumentation GuiServer
+:doctype: book
+:encoding: utf-8
+:lang: de
+
+
+[[chap_Einleitung]]
+== Einleitung
+Der GuiServer ist ein lokaler Service zur Darstellung einer graphischen Benutzeroberfläche und der Interaktion mit ihr.
+Er erhält Anfragen zur Darstellung der graphischen Benutzeroberfläche und für Auskünfte und versendet asynchron Ereignisse von Benutzeraktionen.
+
+
+[[chap_GrundstrukturDerAnfragen]]
+== Grundstruktur der Anfragen
+Es sind zwei Arten von Anfragen möglich: Xml und URN beginnend mit _get_.
+Grundlage für Xml-Anfragen ist die XSD-Datei _GUServer.xsd_, welche sich in src/main/resources von guiserver befindet.
+Für alle Anfragen (außer bei _get_) ist die Angabe der XML-Protokollversion, einer Session-Id und eines Anfragetyps erforderlich.
+Anfragetypen sind die initiale Darstellung einer graphiscen Benutzeroberfläche beim Start einer Anwendung (_InitialGUI_), das Ändern einer vorher dargestellten graphishcen Benutzeroberfläche (_ChangeGUI_) und das Beenden einer Anwendung (_Exit_).
+Die Anfrage _get:1.0.0:resolution_ sendet asynchron die Bildschirmauflösung zurück ("info:1.0.0:resolution:X:"<Breite>"Y:"<Höhe>).
+Die Anfrage _get:1.0.0:session_ sendet asynchron eine Session-Id zurück, die intern im GuiServer verwaltet wird.
+
+
+[[chap_ElementeDerBenutzeroberflaeche]]
+== Elemente der Benutzeroberfläche
+Elemente der Benutzeroberfläche sind in Fenstern, welche mit einer ID, einem Titel der Position und der Größe anzugeben sind, eingebettet.
+Für jedes Element ist verpflichtend eine ID, eine Ebenennummer, eine Zeichnungsnummer (Reihenfolge der graphischen Darstellungen innerhalb einer Ebene) und der Elementtyp anzugeben.
+Optional sind die Transparenz und die nicht standardmäßig bezüglich des Elementtyps zu sendenden Ereignistypen.
+Elementtypen sind Content, Button, Select, Klick, Slider und TextInput.
+Sie können Zustände annehmen, wie Aktiv, Inaktiv, Gedrückt, Maus-Über, AktivDeselektiert, AktivSelektiert, AktivDeselektiertMaus-Über, AktivSelektiertMaus-Über, Mausbewegung mit gedrückter Maustaste.
+
+
+[[chap_Elementtypen]]
+== Elementtypen
+Der Elementtyp Content stellt nur Inhalte dar und versendet keine Ereignisse.
+Der Elementtyp Button stellt Inhalte für die Zustände Aktiv, Gedrückt, Maus-Über, Inaktiv dar.
+Versendet werden die Ereignisse Maus-Über und Geklickt.
+
+Der Elementtyp Select stellt Inhalte für die Zustände AktivDeselktiert, AktivSelektiert, AktivSelektiertMaus-Über, InaktivDeselktiert, InaktivSelektiert dar.
+Versendet werden die Ereignisse Maus-Über und Geklickt.
+Der Elementtyp Klick stellt Inhalte für die Zustände Aktiv, Inaktiv, Maus-Über dar.
+Versendet werden die Ereignisse Maus-Über und Geklickt.
+
+Der Elementtyp Silber stellt Inhalte für die Zustände Aktiv, Inaktiv, Maus-Über, Mausbewegung mit gedrückter Maustaste dar.
+Versendet werden die Ereignisse Maus-Über und Mausbewegung mit gedrückter Maustaste.
+Optional können Bewegungsbereichte in X- und Y-Richtung angegeben werden.
+
+Der Elementtyp TextInputtype stellt Inhalte für die Zustände Aktiv, Inaktiv, Fokus dar.
+Versendet werden die einzelnen Tastatureingaben.
+Zusätzlich muss der Inhalt eines Cursors angegeben werden.
+
+Bei allen Elementtypen ist ein Startzustand anzugeben.
+
+
+[[chap_EreignisseDerBenutzeraktionen]]
+== Ereignisse der Benutzeraktionen
+Ereignisse werden als URN versendet.
+Sie Grundstruktur ist "app:"<Ereignisprotokollversion>":Session:"<SessionId>":"<WindowId>":". +
+Danach kommen für den Ereignistyp abhängige Teile (Schließen eines Fensters, Mausaktionsereignis mit einer Maustaste, Mausaktionsereignis ohne Maustaste, Tastaturereignis).
+
+Das Format ist für das Schließen eines Fensters ist: +
+"WC"
+
+Das Format für ein Mausaktionsereignis mit einer Maustaste ist: +
+<ElementId>":M"<Button: L,M,R><<Mausaktion>":C:"<Anzahl Klicks>":"<Tastendruck Shift>:<Tastendruck Control>":"<Tastendruck Alt>":X:"<X-Position>":Y:"<Y-Position>. +
+Mausaktion ist _P_ (Pressest), _R_ (Released), _C_ (Clicked), _P_ (Pressed). +
+Tastendruck Shift ist _KSY_ (Shift gedrückt> oder _KSN_ (Shift nicht gedrückt). +
+Tastendruck Control ist _KCY_ (Control gedrückt> oder _KCN_ (Control nicht gedrückt). +
+Tastendruck Alt ist _KAY_ (Alt gedrückt> oder _KAN_ (Alt nicht gedrückt).
+
+Das Format für ein Mausaktionsereignis ohne Maustaste ist: +
+<ElementId>":M"<Button: L,M,R><<Mausbewegung>":C:"<Anzahl Klicks>":"<Tastendruck Shift>:<Tastendruck Control>":"<Tastendruck Alt>":X:"<X-Position>":Y:"<Y-Position>. +
+Mausbewegung ist _MM_ (Maus bewegt), _MI_ (Maus betritt Element), _MO_ (Maus verlässt Element).
+
+Das Format für ein Tastaturereignis ist: +
+<ElementId>":KS:"<Text>. +
+Text ist entweder der gedrückte Buchstabe oder eine Eingabezeile abgeschlossen mit Zeilenende.
+
+[[chap_Start]]
+== Start
+Der GuiServer wird unter Windows mit _win\jre1.8.0_73\bin\java -jar GuiServer-1.0.0.jar_ gestartet, unter Mac mit _mac\jre1.8.0_73\bin\java -jar GuiServer-1.0.0.jar_.
+Als Kommandozeilenparameter sind _-host_ und _-port_ möglich.
+Der Default für Host ist _localhost_, der Default für Port ist _7777_.
+
+
+[[chap_VorgeseheneErweiterungen]]
+== Vorgesehene Erweiterungen
+* Zusammengesetzte Elemente wie
+** ListBox (als Java-Klasse)
+** Dateiauswahldialog (als Java-Klasse)
+* RenderEngine von einem der gebräuchlichen Browser als Dienst zum Live-Renndering von HTML-Teilen (d.h. keine Verwendung von CSSBox)
+* Erweiterung der Texteingabe
+** Blinkender Cursor
+** Berücksichtigung der Zwischenablage
+** Unterscheidung von Einfügen und überschreiben
+** Ersatzzeichen für Passwort
+* Versteckte Farben bei Elementen der Benutzeroberfläche
+* Schattierungen der  Elemente der Benutzeroberfläche
+* TLS-Verbindungen
