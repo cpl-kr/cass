@@ -1,4 +1,4 @@
-= The Cloud App Server System (CASS) +
+= The Cloud App Server System (ClApSeSy) +
 :doctype: book
 :encoding: utf-8
 :lang: de
@@ -48,6 +48,8 @@ These files contain placeholder of paths to Java 8 runtime environments.
 The associated Java runtime environments for Java 8 must be installed separately.
 The path specification for _cd_ in the files with the extension _.command_ serves as an example.
 It was tested for Windows Build 1.8.0_73, Linux Build 1.8.0_201 and Mac Build 1.8.0_202.
+The configuration expects a running web server under _localhost:8080_.
+To do this, create a directory _clapsesy_ in the document root of the web server (e.g. _htdocs_ under _xampp_) and copy the directory _GuiElementPages_ into it.
 In the current development state, the GuiServer must be started locally first, then the GuiAdapter. Remote, i.e. on the server side, first the remote application (here ServerDemo1) must be started, then the GuiAppServer. The local applications (here ClientDemo1 and ClientDemo2) must be started after the GuiServer in the current development status.
 
 
@@ -101,6 +103,6 @@ In diesen Dateien sind sind  die Pfade zu Java 8 Laufzeitumgebungen angegeben.
 Die zugehörigen Java-Laufzeitumgebungen für Java 8 sind separat zu installieren.
 Die Pfadangabe bei _cd_ in den Dateien mit der Endung _.command_ dient als Beispiel.
 Die Konfiguration erwartet einen laufenden WebServer unter _localhost:8080_.
-Hierfür ist ist in der Document Root des WebServers (z.B. _htdocs_ unter _xampp_) ein Verzeichnis CASS anzulegen und darin das Verzeichnis _GuiElementSeiten_ zu kopieren.
+Hierfür ist ist in der Document Root des WebServers (z.B. _htdocs_ unter _xampp_) ein Verzeichnis _clapsesy_ anzulegen und darin das Verzeichnis _GuiElementSeiten_ zu kopieren.
 Getestet wurde für Windows Build 1.8.0_73, Linux Build 1.8.0_201 und Mac Build 1.8.0_202.
 Im aktuellen Entwicklungsstand muss lokal zunächst der GuiServer, dann der GuiAdapter gestartet werden. Remote, d.h. auf Server-Seite, muss zunächst die Remote-Anwendung (hier ServerDemo1) gestartet werden, dann der GuiAppServer. Die lokalen Anwendungen (hier ClientDemo1 und ClientDemo2) sind im aktuellen Entwicklungsstand nach dem GuiServer zu starten.
