@@ -33,7 +33,6 @@ Reasons for the development of the CASS:
 <li>Safer</li>
 <li>Platform independent</li>
 </ul>
-<ul>
 <li>Software development view:</li>
 <ul>
 <li>Software development not necessary via "script bridges"</li>
