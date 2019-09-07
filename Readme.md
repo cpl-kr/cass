@@ -3,8 +3,7 @@
 :encoding: utf-8
 :lang: de
 
-[.text-center]
-*Run applications with graphical user interface in the cloud/remote*
+<p>*Run applications with graphical user interface in the cloud/remote*</p>
 
 
 *Overwiev*
@@ -63,8 +62,7 @@ In the current development state, the GuiServer must be started locally first, t
 = Das Cloud App Server System (CASS) +
 :lang: de
 
-[.text-center]
-*Anwendungen mit graphischer Benutzeroberfläche in der Cloud/Remote laufen lassen*
+<p>*Anwendungen mit graphischer Benutzeroberfläche in der Cloud/Remote laufen lassen*</p>
 
 
 *Übersicht*
