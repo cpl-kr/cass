@@ -30,7 +30,6 @@ Reasons for the development of the CASS:
 <li>No longer restricted to the browser</li>
 <li>Possibility to design with HTML and CSS</li>
 <li>No local installation of applications necessary, as long as no local resources from memory and screen are used</li>
-<li>Safer</li>
 <li>Platform independent</li>
 </ul>
 <li>Software development view:</li>
@@ -42,6 +41,7 @@ Reasons for the development of the CASS:
 <li>HTML and CSS design options for the graphical user interface</li>
 <li>No operating system dependent style of the user interface</li>
 <li>No "pure pressing" of applications into a document view for which the previous technology is designed (synchronous sequence of request - response)</li>
+<li>Safer</li>
 </ul>
 </ul>
 
@@ -85,21 +85,26 @@ Zusätzlich stehen drei Demoanwendungen zur Verfügung: Zwei Client-Anwendungen 
 
 Gründe für die Entwicklung des CASS:
 
-* Anwendungssicht:
-** Nicht mehr auf den Browser beschränkt
-** Möglichkeit der Gestaltung mit HTML und CSS
-** Keine lokalen Installationen von Anwendungen nötig, sofern nur die graphische Benutzeroberfläche verwendet wird
-** Sicherer
-** Plattformunabhängig
-* Softwareentwicklungssicht:
-** Softwareentwicklung nicht über "Script-Brücken" nötig
-** Kein separates Web-Framework nötig
-** Softwareentwicklung mit den Sprachen der Wahl leichter möglich
-** Lose Kopplung der Gui über ein Protokoll, kein für eine Entwicklungsumgebung abhängiges Gui-Framework mehr nötig
-** Gestaltungsmöglichkeiten durch HTML und CSS für die graphische Oberfläche
-** Kein vom Betriebssystem abhängiger Style der Oberfläche
-** Kein "Reinpressen" von Anwendungen in eine Dokumentansicht, auf die die bisherige Technik ausgelegt ist (synchroner Ablauf von Request - Response)
-
+<ul>
+<li>Anwendungssicht:</li>
+<ul>
+li>Nicht mehr auf den Browser beschränkt</li>
+<li>Möglichkeit der Gestaltung mit HTML und CSS</li>
+<li>Keine lokalen Installationen von Anwendungen nötig, sofern nur die graphische Benutzeroberfläche verwendet wird</li>
+<li>Plattformunabhängig</li>
+</ul>
+<li>Softwareentwicklungssicht:</li>
+<ul>
+<li>Softwareentwicklung nicht über "Script-Brücken" nötig</li>
+<li>Kein separates Web-Framework nötig</li>
+<li>Softwareentwicklung mit den Sprachen der Wahl leichter möglich</li>
+<li>Lose Kopplung der Gui über ein Protokoll, kein für eine Entwicklungsumgebung abhängiges Gui-Framework mehr nötig</li>
+<li>Gestaltungsmöglichkeiten durch HTML und CSS für die graphische Oberfläche</li>
+<li>Kein vom Betriebssystem abhängiger Style der Oberfläche</li>
+</li>Kein "Reinpressen" von Anwendungen in eine Dokumentansicht, auf die die bisherige Technik ausgelegt ist (synchroner Ablauf von Request - Response)</li>
+<li>Sicherer</li>
+</ul>
+</ul>
 
 *Installation und Start des Systems (Verzeichnis _binary_):*
 
