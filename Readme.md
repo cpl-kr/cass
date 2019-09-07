@@ -24,20 +24,27 @@ In addition, three demo applications are available: Two client applications for 
 
 Reasons for the development of the CASS:
 
-* Application view:
-** No longer restricted to the browser
-** Possibility to design with HTML and CSS
-** No local installation of applications necessary, as long as no local resources from memory and screen are used
-** Safer
-** Platform independent
-* Software development view:
-** Software development not necessary via "script bridges
-** No separate web framework necessary for Software development
-** Software development with the languages of your choice
-** Loose coupling of the Gui via a protocol, no Gui framework required for a development environment anymore
-** HTML and CSS design options for the graphical user interface
-** No operating system dependent style of the user interface
-** No "pure pressing" of applications into a document view for which the previous technology is designed (synchronous sequence of request - response)
+<ul>
+<li>Application view:</li>
+<ul>
+<li>No longer restricted to the browser</li>
+<li>Possibility to design with HTML and CSS</li>
+<li>No local installation of applications necessary, as long as no local resources from memory and screen are used</li>
+<li>Safer</li>
+<li>Platform independent</li>
+</ul>
+<ul>
+<li>Software development view:</li>
+<ul>
+<li>Software development not necessary via "script bridges"</li>
+<li>No separate web framework necessary for Software development</li>
+<li>Software development with programming languages of your choice</li>
+<li>Loose coupling of the Gui via a protocol, no Gui framework required for a development environment anymore</li>
+<li>HTML and CSS design options for the graphical user interface</li>
+<li>No operating system dependent style of the user interface</li>
+<li>No "pure pressing" of applications into a document view for which the previous technology is designed (synchronous sequence of request - response)</li>
+</ul>
+</ul>
 
 
 *Installation und Start of the system (folder _binary_):*
