@@ -1,7 +1,4 @@
-= The Cloud App Server System (ClApSeSy) +
-:doctype: book
-:encoding: utf-8
-:lang: de
+<h1>The Cloud App Server System (ClApSeSy)</h1>
 
 *Run applications with graphical user interface in the cloud/remote*
 
@@ -59,8 +56,7 @@ In the current development state, the GuiServer must be started locally first, t
 
 
 
-= Das Cloud App Server System (ClApSeSy) +
-:lang: de
+<h1>Das Cloud App Server System (ClApSeSy)<h1>
 
 *Anwendungen mit graphischer Benutzeroberfläche in der Cloud/Remote laufen lassen*
 
