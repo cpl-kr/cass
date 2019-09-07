@@ -88,7 +88,7 @@ Gründe für die Entwicklung des CASS:
 <ul>
 <li>Anwendungssicht:</li>
 <ul>
-li>Nicht mehr auf den Browser beschränkt</li>
+<li>Nicht mehr auf den Browser beschränkt</li>
 <li>Möglichkeit der Gestaltung mit HTML und CSS</li>
 <li>Keine lokalen Installationen von Anwendungen nötig, sofern nur die graphische Benutzeroberfläche verwendet wird</li>
 <li>Plattformunabhängig</li>
