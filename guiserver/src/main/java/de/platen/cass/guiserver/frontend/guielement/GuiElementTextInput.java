@@ -100,7 +100,8 @@ public class GuiElementTextInput extends GuiElement {
 		return this.imagesTextInput.getImageView();
 	}
 
-	public synchronized void handleInput(String character, KeyCode keyCode, String text, EventSenderKeyboard eventSenderKeyboard) {
+	public synchronized void handleInput(String character, KeyCode keyCode, String text,
+			EventSenderKeyboard eventSenderKeyboard) {
 		if (actualState.equals(State.FOCUS)) {
 			if (text.equals("")) {
 				if (keyCode == KeyCode.UNDEFINED) {
@@ -194,9 +195,11 @@ public class GuiElementTextInput extends GuiElement {
 			this.inputText = "";
 			this.cursorPosition = 0;
 		} else {
-			this.inputText = this.inputText.substring(0, this.cursorPosition - 1)
-					+ this.inputText.substring(this.cursorPosition);
-			this.cursorPosition--;
+			if (this.cursorPosition > 0) {
+				this.inputText = this.inputText.substring(0, this.cursorPosition - 1)
+						+ this.inputText.substring(this.cursorPosition);
+				this.cursorPosition--;
+			}
 		}
 	}
 
@@ -219,8 +222,7 @@ public class GuiElementTextInput extends GuiElement {
 			content = new String(cursor) + text;
 		}
 		if (cursorposition < text.length()) {
-			content = text.substring(0, cursorposition) + new String(cursor)
-					+ text.substring(cursorposition);
+			content = text.substring(0, cursorposition) + new String(cursor) + text.substring(cursorposition);
 		}
 		String html = htmlInput.getHtmlBefore() + content + htmlInput.getHtmlAfter();
 		try {
