@@ -135,7 +135,7 @@ public class GuiElementTextInput extends GuiElement {
 					}
 				}
 			} else {
-				this.handleInput(text);
+				// this.handleInput(text);
 			}
 		}
 	}
