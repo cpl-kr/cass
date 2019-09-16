@@ -101,7 +101,7 @@ public class ApplicationWindow {
 						try {
 							String clipboardText = getClipboardText(event);
 							if (clipboardText == null) {
-								System.out.println("Texteingabe Key Typed");
+								// System.out.println("Texteingabe Key Typed");
 								ApplicationWindow.this.focusElement.handleInput(event.getCharacter(), event.getCode(),
 										event.getText(), ApplicationWindow.this.eventSenderKeyboard);
 							} else {
@@ -127,7 +127,7 @@ public class ApplicationWindow {
 						try {
 							String clipboardText = getClipboardText(event);
 							if (clipboardText == null) {
-								System.out.println("Texteingabe Key Pressed");
+								// System.out.println("Texteingabe Key Pressed");
 								ApplicationWindow.this.focusElement.handleInput(event.getCharacter(), event.getCode(),
 										event.getText(), ApplicationWindow.this.eventSenderKeyboard);
 							} else {
