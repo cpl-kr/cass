@@ -105,7 +105,7 @@ public class ApplicationWindow {
 								ApplicationWindow.this.focusElement.handleInput(event.getCharacter(), event.getCode(),
 										event.getText(), ApplicationWindow.this.eventSenderKeyboard);
 							} else {
-								System.out.println("Text aus Zwischenablage bei Key Typed: " + clipboardText);
+								// System.out.println("Text aus Zwischenablage bei Key Typed: " + clipboardText);
 								ApplicationWindow.this.focusElement.handleInput(clipboardText, event.getCode(),
 										clipboardText, ApplicationWindow.this.eventSenderKeyboard);
 							}
@@ -131,7 +131,7 @@ public class ApplicationWindow {
 								ApplicationWindow.this.focusElement.handleInput(event.getCharacter(), event.getCode(),
 										event.getText(), ApplicationWindow.this.eventSenderKeyboard);
 							} else {
-								System.out.println("Text aus Zwischenablage bei Key Pressed: " + clipboardText);
+								// System.out.println("Text aus Zwischenablage bei Key Pressed: " + clipboardText);
 								ApplicationWindow.this.focusElement.handleInput(clipboardText, event.getCode(),
 										clipboardText, ApplicationWindow.this.eventSenderKeyboard);
 							}

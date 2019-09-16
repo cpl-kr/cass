@@ -131,6 +131,9 @@ public class GuiElementTextInput extends GuiElement {
 					case DELETE:
 						this.handleDelete();
 						break;
+					case INSERT:
+						System.out.println("Einfügen gedrückt.");
+						break;
 					default:
 						break;
 					}
