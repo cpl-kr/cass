@@ -39,12 +39,17 @@ import de.platen.cass.guiserver.frontend.guielement.View;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.event.EventHandler;
 
 public class ApplicationWindow {
+
+	private static final Clipboard systemClipboard = Clipboard.getSystemClipboard();
 
 	private final String windowId;
 	private final Map<Integer, Map<Integer, GuiElement>> elementeSortiert;
@@ -94,8 +99,16 @@ public class ApplicationWindow {
 				public void handle(KeyEvent event) {
 					if (ApplicationWindow.this.focusElement != null) {
 						try {
-							ApplicationWindow.this.focusElement.handleInput(event.getCharacter(), event.getCode(),
-									event.getText(), ApplicationWindow.this.eventSenderKeyboard);
+							String clipboardText = getClipboardText(event);
+							if (clipboardText == null) {
+								System.out.println("Texteingabe Key Typed");
+								ApplicationWindow.this.focusElement.handleInput(event.getCharacter(), event.getCode(),
+										event.getText(), ApplicationWindow.this.eventSenderKeyboard);
+							} else {
+								System.out.println("Text aus Zwischenablage bei Key Typed: " + clipboardText);
+								ApplicationWindow.this.focusElement.handleInput(clipboardText, event.getCode(),
+										clipboardText, ApplicationWindow.this.eventSenderKeyboard);
+							}
 						} catch (GuiServerException e) {
 							e.printStackTrace();
 						} catch (RuntimeException e) {
@@ -112,8 +125,16 @@ public class ApplicationWindow {
 				public void handle(KeyEvent event) {
 					if (ApplicationWindow.this.focusElement != null) {
 						try {
-							ApplicationWindow.this.focusElement.handleInput(event.getCharacter(), event.getCode(),
-									event.getText(), ApplicationWindow.this.eventSenderKeyboard);
+							String clipboardText = getClipboardText(event);
+							if (clipboardText == null) {
+								System.out.println("Texteingabe Key Pressed");
+								ApplicationWindow.this.focusElement.handleInput(event.getCharacter(), event.getCode(),
+										event.getText(), ApplicationWindow.this.eventSenderKeyboard);
+							} else {
+								System.out.println("Text aus Zwischenablage bei Key Pressed: " + clipboardText);
+								ApplicationWindow.this.focusElement.handleInput(clipboardText, event.getCode(),
+										clipboardText, ApplicationWindow.this.eventSenderKeyboard);
+							}
 						} catch (GuiServerException e) {
 							e.printStackTrace();
 						} catch (RuntimeException e) {
@@ -337,5 +358,17 @@ public class ApplicationWindow {
 				}
 			}
 		}
+	}
+
+	private static String getClipboardText(KeyEvent event) {
+		if (event.isControlDown() && event.getCode().equals(KeyCode.V)) {
+			System.out.println("Strg + v gedrückt.");
+			return (String) systemClipboard.getContent(DataFormat.PLAIN_TEXT);
+		}
+		if (event.isControlDown() && event.getCharacter().equals("v")) {
+			System.out.println("Strg + v gedrückt.");
+			return (String) systemClipboard.getContent(DataFormat.PLAIN_TEXT);
+		}
+		return null;
 	}
 }

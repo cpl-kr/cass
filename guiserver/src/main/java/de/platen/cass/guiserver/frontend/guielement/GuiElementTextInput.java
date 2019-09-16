@@ -100,7 +100,7 @@ public class GuiElementTextInput extends GuiElement {
 		return this.imagesTextInput.getImageView();
 	}
 
-	public void handleInput(String character, KeyCode keyCode, String text, EventSenderKeyboard eventSenderKeyboard) {
+	public synchronized void handleInput(String character, KeyCode keyCode, String text, EventSenderKeyboard eventSenderKeyboard) {
 		if (actualState.equals(State.FOCUS)) {
 			if (text.equals("")) {
 				if (keyCode == KeyCode.UNDEFINED) {
@@ -134,6 +134,8 @@ public class GuiElementTextInput extends GuiElement {
 						break;
 					}
 				}
+			} else {
+				this.handleInput(text);
 			}
 		}
 	}
@@ -158,7 +160,7 @@ public class GuiElementTextInput extends GuiElement {
 								}
 							}
 						}
-						this.cursorPosition++;
+						this.cursorPosition += text.length();
 					}
 				} else {
 					handleDelete();
