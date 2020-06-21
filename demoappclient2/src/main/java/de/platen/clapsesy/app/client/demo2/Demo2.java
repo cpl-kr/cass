@@ -1,4 +1,4 @@
-package de.platen.cass.app.client.demo2;
+package de.platen.clapsesy.app.client.demo2;
 
 import java.net.URI;
 import java.net.URISyntaxException;

@@ -1,4 +1,4 @@
-package de.platen.cass.app;
+package de.platen.clapsesy.app;
 
 
 public class Version {

@@ -1,4 +1,4 @@
-package de.platen.cass.app.event.client;
+package de.platen.clapsesy.app.event.client;
 
 import org.java_websocket.WebSocket;
 

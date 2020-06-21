@@ -1,4 +1,4 @@
-package de.platen.cass.app.client.demo1;
+package de.platen.clapsesy.app.client.demo1;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,16 +12,16 @@ import java.util.UUID;
 
 import org.java_websocket.WebSocket;
 
-import de.platen.cass.app.event.EventHandlerWindow;
-import de.platen.cass.app.event.EventHandlerMouse;
-import de.platen.cass.app.event.EventMouse;
-import de.platen.cass.app.event.EventHandlerKey;
-import de.platen.cass.app.event.EventMouseButton;
-import de.platen.cass.app.event.EventType;
-import de.platen.cass.app.event.KeyAttribute;
-import de.platen.cass.app.event.client.ClientGuiElement;
-import de.platen.cass.app.event.client.SessionHolder;
-import de.platen.cass.app.event.client.WebSocketHolder;
+import de.platen.clapsesy.app.event.EventHandlerKey;
+import de.platen.clapsesy.app.event.EventHandlerMouse;
+import de.platen.clapsesy.app.event.EventHandlerWindow;
+import de.platen.clapsesy.app.event.EventMouse;
+import de.platen.clapsesy.app.event.EventMouseButton;
+import de.platen.clapsesy.app.event.EventType;
+import de.platen.clapsesy.app.event.KeyAttribute;
+import de.platen.clapsesy.app.event.client.ClientGuiElement;
+import de.platen.clapsesy.app.event.client.SessionHolder;
+import de.platen.clapsesy.app.event.client.WebSocketHolder;
 
 public class Demo1 {
 

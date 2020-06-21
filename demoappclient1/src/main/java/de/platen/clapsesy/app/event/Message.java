@@ -1,10 +1,10 @@
-package de.platen.cass.app.event;
+package de.platen.clapsesy.app.event;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.platen.cass.app.Version;
+import de.platen.clapsesy.app.Version;
 
 public class Message {
 

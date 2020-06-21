@@ -1,4 +1,4 @@
-package de.platen.clapsesy.app;
+package de.platen.clapsesy.resourcenadapter;
 
 
 

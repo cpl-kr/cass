@@ -1,4 +1,4 @@
-package de.platen.cass.app.client.demo1;
+package de.platen.clapsesy.app.client.demo1;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -7,8 +7,8 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
 
-import de.platen.cass.app.Version;
-import de.platen.cass.app.event.client.SessionHolder;
+import de.platen.clapsesy.app.Version;
+import de.platen.clapsesy.app.event.client.SessionHolder;
 
 public class WebSocketAppClient extends WebSocketClient {
 

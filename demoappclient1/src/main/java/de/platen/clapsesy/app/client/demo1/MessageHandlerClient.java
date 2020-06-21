@@ -1,4 +1,4 @@
-package de.platen.cass.app.client.demo1;
+package de.platen.clapsesy.app.client.demo1;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,8 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import de.platen.cass.app.Version;
-import de.platen.cass.app.event.client.ClientGuiElement;
+import de.platen.clapsesy.app.Version;
+import de.platen.clapsesy.app.event.client.ClientGuiElement;
 
 public class MessageHandlerClient {
 

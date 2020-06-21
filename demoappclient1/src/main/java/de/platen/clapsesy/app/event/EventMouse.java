@@ -1,4 +1,4 @@
-package de.platen.cass.app.event;
+package de.platen.clapsesy.app.event;
 
 public class EventMouse {
 

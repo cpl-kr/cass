@@ -1,4 +1,4 @@
-package de.platen.cass.app.client.demo1;
+package de.platen.clapsesy.app.client.demo1;
 
 public class Application {
 
