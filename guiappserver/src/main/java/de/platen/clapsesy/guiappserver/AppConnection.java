@@ -1,4 +1,4 @@
-package de.platen.cass.guiappserver;
+package de.platen.clapsesy.guiappserver;
 
 import java.net.URI;
 import java.util.Map;
