@@ -1,4 +1,4 @@
-package de.platen.cass.guiadapter;
+package de.platen.clapsesy.guiadapter;
 
 import java.io.IOException;
 import java.net.URI;
