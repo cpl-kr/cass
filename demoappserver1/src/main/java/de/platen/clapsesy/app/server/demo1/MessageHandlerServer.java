@@ -1,4 +1,4 @@
-package de.platen.cass.app.server.demo1;
+package de.platen.clapsesy.app.server.demo1;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import org.java_websocket.WebSocket;
 
-import de.platen.cass.app.event.server.ServerGuiElement;
+import de.platen.clapsesy.app.event.server.ServerGuiElement;
 
 public class MessageHandlerServer {
 

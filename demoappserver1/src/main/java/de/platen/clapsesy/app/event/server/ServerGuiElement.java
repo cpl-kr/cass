@@ -1,4 +1,4 @@
-package de.platen.cass.app.event.server;
+package de.platen.clapsesy.app.event.server;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,13 +9,13 @@ import java.util.UUID;
 
 import org.java_websocket.WebSocket;
 
-import de.platen.cass.app.event.EventMouseButton;
-import de.platen.cass.app.event.EventType;
-import de.platen.cass.app.event.KeyAttribute;
-import de.platen.cass.app.event.Message;
-import de.platen.cass.app.event.EventMouse;
-import de.platen.cass.app.event.EventHandlerKey;
-import de.platen.cass.app.event.EventHandlerWindow;
+import de.platen.clapsesy.app.event.EventHandlerKey;
+import de.platen.clapsesy.app.event.EventHandlerWindow;
+import de.platen.clapsesy.app.event.EventMouse;
+import de.platen.clapsesy.app.event.EventMouseButton;
+import de.platen.clapsesy.app.event.EventType;
+import de.platen.clapsesy.app.event.KeyAttribute;
+import de.platen.clapsesy.app.event.Message;
 
 public class ServerGuiElement {
 

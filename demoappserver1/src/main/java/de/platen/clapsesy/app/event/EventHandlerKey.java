@@ -1,4 +1,4 @@
-package de.platen.cass.app.event;
+package de.platen.clapsesy.app.event;
 
 import java.util.UUID;
 
