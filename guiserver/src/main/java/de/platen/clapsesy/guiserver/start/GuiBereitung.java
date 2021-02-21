@@ -23,19 +23,20 @@ public final class GuiBereitung {
 
     private final SessionVerwaltung sessionVerwaltung;
     private final GuiBehandlung guiBehandlung;
-    private final InputStream inputStream;
+    private final String xsdFilename;
 
     public GuiBereitung(final SessionVerwaltung sessionVerwaltung, final GuiBehandlung guiBehandlung,
             final String xsdFilename) {
         this.sessionVerwaltung = sessionVerwaltung;
         this.guiBehandlung = guiBehandlung;
-        inputStream = this.getClass().getClassLoader().getResourceAsStream(xsdFilename);
-        if (inputStream == null) {
-            throw new GuiServerException("XSD-Datei konnte nicht gelesen werden.");
-        }
+        this.xsdFilename = xsdFilename;
     }
 
     public void bereiteGui(final byte[] xmlDaten, final WebSocket conn) {
+        final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(xsdFilename);
+        if (inputStream == null) {
+            throw new GuiServerException("XSD-Datei konnte nicht gelesen werden.");
+        }
         final GUI gui = bereiteGUI(xmlDaten, inputStream);
         if (gui.getType().getInitialGUI() != null) {
             if (sessionVerwaltung.useSession(UUID.fromString(gui.getSessionId()))) {
