@@ -1,32 +1,37 @@
 package de.platen.clapsesy.guiserver.frontend.guielement;
 
+import de.platen.clapsesy.guiserver.frontend.Height;
+import de.platen.clapsesy.guiserver.frontend.Width;
+import de.platen.clapsesy.guiserver.frontend.X;
+import de.platen.clapsesy.guiserver.frontend.Y;
+
 public class ElementPosition {
 
-	private final int x;
-	private final int y;
-	private final int width;
-	private final int height;
-	
-	public ElementPosition(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
+    private final X x;
+    private final Y y;
+    private final Width width;
+    private final Height height;
 
-	public int getX() {
-		return x;
-	}
+    public ElementPosition(final X x, final Y y, final Width width, final Height height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
 
-	public int getY() {
-		return y;
-	}
+    public X getX() {
+        return x;
+    }
 
-	public int getWidth() {
-		return width;
-	}
+    public Y getY() {
+        return y;
+    }
 
-	public int getHeight() {
-		return height;
-	}
+    public Width getWidth() {
+        return width;
+    }
+
+    public Height getHeight() {
+        return height;
+    }
 }

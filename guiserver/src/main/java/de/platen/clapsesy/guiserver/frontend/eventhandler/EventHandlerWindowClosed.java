@@ -7,28 +7,23 @@ import javafx.stage.WindowEvent;
 
 public class EventHandlerWindowClosed {
 
-	private final EventHandler<WindowEvent> eventHandler;
-	private final EventSenderWindowClosed eventSenderWindowClosed;
+    private final EventHandler<WindowEvent> eventHandler;
 
-	public EventHandlerWindowClosed(EventSenderWindowClosed eventSenderWindowClosed) {
-		this.eventSenderWindowClosed = eventSenderWindowClosed;
-		this.eventHandler = new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent event) {
-				try {
-					eventSenderWindowClosed.sendEvent();
-				} catch (GuiServerException e) {
-					e.printStackTrace();
-				} catch (RuntimeException e) {
-					e.printStackTrace();
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
-			}
-		};
-	}
+    public EventHandlerWindowClosed(final EventSenderWindowClosed eventSenderWindowClosed) {
+        eventHandler = event -> {
+            try {
+                eventSenderWindowClosed.sendEvent();
+            } catch (final GuiServerException e1) {
+                e1.printStackTrace();
+            } catch (final RuntimeException e2) {
+                e2.printStackTrace();
+            } catch (final Throwable e3) {
+                e3.printStackTrace();
+            }
+        };
+    }
 
-	public EventHandler<WindowEvent> getEventHandler() {
-		return eventHandler;
-	}
+    public EventHandler<WindowEvent> getEventHandler() {
+        return eventHandler;
+    }
 }

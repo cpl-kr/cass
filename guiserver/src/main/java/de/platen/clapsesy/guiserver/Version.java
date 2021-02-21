@@ -1,7 +1,7 @@
 package de.platen.clapsesy.guiserver;
 
 public class Version {
-	
-	public static String VERSION = "1.0.0";
+
+    public static String VERSION = "2.0.0";
 
 }

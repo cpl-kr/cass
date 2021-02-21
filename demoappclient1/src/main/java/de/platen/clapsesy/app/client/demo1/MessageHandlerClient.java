@@ -11,51 +11,44 @@ import de.platen.clapsesy.app.event.client.ClientGuiElement;
 
 public class MessageHandlerClient {
 
-	private final  String path;
-	private final List<ClientGuiElement> guiElements;
-	
-	public MessageHandlerClient(String path, List<ClientGuiElement> guiElements) {
-		this.path = path;
-		this.guiElements = guiElements;
-	}
-	
-	public void sendGetSession(WebSocketAppClient webSocket) {
-		String getSession = "get:" + Version.VERSION + ":session";
-		sendData(getSession.getBytes(), webSocket);
-	}
-	
-	public void sendInitialGui(WebSocketAppClient webSocket, String session) {
-		byte[] xmlDaten = ladeGUIAusDatei(this.path + "InitialGUI.xml");
-		String data = new String(xmlDaten);
-		String[] parts = data.split("<SessionId>");
-		if (parts.length == 2) {
-			String dataToSend = parts[0] + "<SessionId>" + session + parts[1];
-			sendData(dataToSend.getBytes(), webSocket);
-		}
-	}
+    private final String path;
+    private final List<ClientGuiElement> guiElements;
 
-	public void handleMessage(String message, WebSocketAppClient webSocket) {
-		for (ClientGuiElement clientGuiElement : this.guiElements) {
-			clientGuiElement.handleMessage(message);
-		}
-	}
+    public MessageHandlerClient(final String path, final List<ClientGuiElement> guiElements) {
+        this.path = path;
+        this.guiElements = guiElements;
+    }
 
-	private static void sendData(byte[] xmlDaten, WebSocketAppClient webSocket) {
-		String data = new String(xmlDaten);
-		webSocket.send(data);
-	}
+    public void sendGetSession(final WebSocketAppClient webSocket) {
+        final String getSession = "get:" + Version.VERSION + ":session";
+        sendData(getSession.getBytes(), webSocket);
+    }
 
-	private static byte[] ladeGUIAusDatei(String xmlDateiname) {
-		byte[] xmlDaten = new byte[0];
-		Path path = Paths.get(xmlDateiname);
-		try {
-			xmlDaten = Files.readAllBytes(path);
-		} catch (IOException e) {
-			System.out.println("Fehler bei Lesen von Datei.");
-			e.printStackTrace();
-			return xmlDaten;
-		}
-		return xmlDaten;
-	}
+    public void sendInitialGui(final WebSocketAppClient webSocket, final String xmlDaten) {
+        sendData(xmlDaten.getBytes(), webSocket);
+    }
 
+    public void handleMessage(final String message, final WebSocketAppClient webSocket) {
+        for (final ClientGuiElement clientGuiElement : guiElements) {
+            clientGuiElement.handleMessage(message);
+        }
+    }
+
+    private static void sendData(final byte[] xmlDaten, final WebSocketAppClient webSocket) {
+        final String data = new String(xmlDaten);
+        webSocket.send(data);
+    }
+
+    private static byte[] ladeGUIAusDatei(final String xmlDateiname) {
+        byte[] xmlDaten = new byte[0];
+        final Path path = Paths.get(xmlDateiname);
+        try {
+            xmlDaten = Files.readAllBytes(path);
+        } catch (final IOException e) {
+            System.out.println("Fehler bei Lesen von Datei.");
+            e.printStackTrace();
+            return xmlDaten;
+        }
+        return xmlDaten;
+    }
 }
