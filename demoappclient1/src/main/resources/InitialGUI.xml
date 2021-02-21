@@ -18,10 +18,10 @@
 					</Position>
 					<Startflaeche>
 						<Position>
-							<X-Position>100</X-Position>
-							<Y-Position>100</Y-Position>
-							<Width>600</Width>
-							<Height>600</Height>
+							<X-Position>0</X-Position>
+							<Y-Position>0</Y-Position>
+							<Width>300</Width>
+							<Height>300</Height>
 						</Position>
 						<Elementflaeche>
 							<ScrollbalkenHorizontal>
