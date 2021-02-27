@@ -59,6 +59,9 @@ public class WebSocketClientRenderer extends WebSocketClient {
             }
         }
         System.out.print("Daten geholt");
-        return daten;
+        final byte[] datenKopie = new byte[daten.length];
+        System.arraycopy(daten, 0, datenKopie, 0, daten.length);
+        daten = null;
+        return datenKopie;
     }
 }
