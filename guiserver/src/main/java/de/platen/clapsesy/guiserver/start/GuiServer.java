@@ -69,6 +69,18 @@ public class GuiServer extends Application {
         System.out.println("Port: " + port);
         System.out.println("HostRenderer: " + hostRenderer);
         System.out.println("PortRenderer: " + portRenderer);
+        final WebSocketGuiServer websocketGuiServer = init(host, port, hostRenderer, portRenderer);
+        launch(args);
+        try {
+            websocketGuiServer.stop();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("GUI-Server wurde beendet.");
+    }
+
+    private static WebSocketGuiServer init(final String host, final int port, final String hostRenderer,
+            final int portRenderer) throws URISyntaxException {
         final URI uri = new URI("ws://" + hostRenderer + ":" + portRenderer);
         final WebSocketClientRenderer webSocketClientRenderer = new WebSocketClientRenderer(uri);
         webSocketClientRenderer.connect();
@@ -84,13 +96,7 @@ public class GuiServer extends Application {
                 sessionVerwaltung, guiBereitung, guiBehandlung);
         final Thread thread = new Thread(new WebSocketGuiServerThread(websocketGuiServer));
         thread.start();
-        launch(args);
-        try {
-            websocketGuiServer.stop();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("GUI-Server wurde beendet.");
+        return websocketGuiServer;
     }
 
     private static Stage erzeugeStartfenster(final int x, final int y, final int breiteScene, final int hoeheScene,
