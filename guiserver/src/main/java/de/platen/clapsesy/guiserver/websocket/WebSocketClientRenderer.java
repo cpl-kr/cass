@@ -2,7 +2,6 @@ package de.platen.clapsesy.guiserver.websocket;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
@@ -12,7 +11,6 @@ import de.platen.clapsesy.guiserver.exception.GuiServerException;
 
 public class WebSocketClientRenderer extends WebSocketClient {
 
-    private final ReentrantLock reentrantLock = new ReentrantLock();
     private byte[] daten = null;
 
     public WebSocketClientRenderer(final URI serverUri, final Draft draft) {
@@ -56,7 +54,11 @@ public class WebSocketClientRenderer extends WebSocketClient {
             } catch (final InterruptedException e) {
                 throw new GuiServerException(e);
             }
+            if (daten == null) {
+                throw new GuiServerException("Daten sind nach Timeout immer noh null");
+            }
         }
+        System.out.print("Daten geholt");
         return daten;
     }
 }
