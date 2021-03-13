@@ -58,7 +58,6 @@ public class WebSocketClientRenderer extends WebSocketClient {
                 throw new GuiServerException("Daten sind nach Timeout immer noh null");
             }
         }
-        System.out.print("Daten geholt");
         final byte[] datenKopie = new byte[daten.length];
         System.arraycopy(daten, 0, datenKopie, 0, daten.length);
         daten = null;
