@@ -4,11 +4,13 @@ import java.net.InetSocketAddress;
 import java.net.URISyntaxException;
 
 import org.apache.commons.cli.ParseException;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class IntegrationTest {
 
     @Test
+    @Ignore
     public void testOk() throws InterruptedException {
         final Thread threadHtmlRenderer = new Thread(
                 new WebSocketServerHtmlRenderer(new InetSocketAddress("localhost", 1111)));
