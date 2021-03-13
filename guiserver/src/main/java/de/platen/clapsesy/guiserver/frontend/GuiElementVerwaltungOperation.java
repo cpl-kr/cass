@@ -26,17 +26,19 @@ public class GuiElementVerwaltungOperation extends GuiElementVerwaltung {
 
     public void addInitialFrontView(final Verbindung verbindung) {
         final int anzahlEbenen = getAnzahlEbenen();
-        for (int nummerEbene = 1; nummerEbene < anzahlEbenen; nummerEbene++) {
+        for (int nummerEbene = 1; nummerEbene <= anzahlEbenen; nummerEbene++) {
             final Ebene ebene = new Ebene(new GanzzahlPositiv(nummerEbene));
             final int anzahlZeichnungsnummern = getAnzahlZeichnungsnummern(ebene);
-            for (int nummerZeichnungsnummer = 1; nummerZeichnungsnummer < anzahlZeichnungsnummern; nummerZeichnungsnummer++) {
+            for (int nummerZeichnungsnummer = 1; nummerZeichnungsnummer <= anzahlZeichnungsnummern; nummerZeichnungsnummer++) {
                 final Zeichnungsnummer zeichnungsnummer = new Zeichnungsnummer(
                         new GanzzahlPositiv(nummerZeichnungsnummer));
                 final GuiElement guiElement = elemente.get(ebene).get(zeichnungsnummer);
                 if (guiElement instanceof GuiElementFlaeche) {
+                    System.out.println("Initial FrontView für ein Elementfläche");
                     final GuiElementFlaeche guiElementFlaeche = (GuiElementFlaeche) guiElement;
                     guiElementFlaeche.getVerwaltung().addInitialFrontView(verbindung);
                 } else {
+                    System.out.println("Initial FrontView für ein Element");
                     guiElement.addInitialFrontView(verbindung.get());
                 }
             }
