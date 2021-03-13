@@ -17,8 +17,8 @@ public class IntegrationTest {
         final GuiServer guiServer = new GuiServer();
         final Thread threadGuiServer = new Thread(guiServer);
         threadGuiServer.start();
+        // TODO Breakpoint in folgender Zeile und Client separat starten
         Thread.sleep(3000);
-        // TODO Client
     }
 
     private class GuiServer implements Runnable {
