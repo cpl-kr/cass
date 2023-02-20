@@ -13,14 +13,16 @@ Da jeder wissenschaftliche Text Verweise auf andere wissenschaftliche Texte hat,
 Um wissenschaftliche Texte kommentieren zu können, sind Formulare eingeführt worden.
 Heute hat sich das Paradigma der Internetseiten geändert.
 Man erwartet im Browser eine App.
+Um diese Erwartung zu erfüllen bedient man sich der bisherigen Technik.
 Für dieses geänderte Paradigma ist dieses Projekt entstanden.
 Dazu laufen lokal ein GuiServer und ein HTML-Renderer.
 Der GuiServer verwaltet Bedien- und Ansichtselemente einer Anwendung (Button, Textfeld, Textbereich, Bild, usw.).
 Statt wie bisher eine HTML-Seite als Ganzes zu rendern, wird jedes Bedien-und Ansichtselement für sich in HTML beschrieben und gerendert.
 Die Elemente sind in Ebenen angeordnet und können pixelgenau positioniert werden.
 Der GuiServer kann sowohl lokal als auch Remote angesprochen werden.
-Somit kann eine Anwendung kann programmiert wie eine Desktop-Anwendung programmiert werden.
+Somit kann eine Anwendung wie eine Desktop-Anwendung programmiert werden.
 Wenn auf allen gängigen Plattformen (Windows, Linux, MacOs, iOS, Android) jeweils ein GuiServer und ein HTML-Renderer installiert sind, können Anwendungen plattformunabhängig entwickelt werden.
+Ein Browser ist nicht mehr nötig.
 
 *Übersicht*
 
@@ -88,14 +90,16 @@ Since every scientific text has references to other scientific texts, links were
 To be able to comment on scientific texts, forms have been introduced.
 Today, the paradigm of web pages has changed.
 People expect an app in the browser.
+To fulfill this expectation, one uses the previous technology.
 This project was created for this changed paradigm.
-For this purpose a GuiServer and a HTML renderer are running locally.
+For this purpose, a GuiServer and an HTML renderer are running locally.
 The GuiServer manages control and view elements of an application (button, text field, text area, image, etc.).
 Instead of rendering an HTML page as a whole, each control and view element is described and rendered separately in HTML.
 The elements are arranged in layers and can be positioned with pixel accuracy.
-The GuiServer can be addressed locally as well as remotely.
+The GuiServer can be accessed locally as well as remotely.
 Thus an application can be programmed like a desktop application.
 If a GuiServer and an HTML renderer are installed on each of the common platforms (Windows, Linux, MacOs, iOS, Android), applications can be developed platform-independently.
+A browser is no longer necessary.
 
 *Overwiev*
 
