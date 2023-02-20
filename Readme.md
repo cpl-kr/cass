@@ -7,21 +7,20 @@ English version below
 *Einleitung*
 
 Dieses Projekt stellt eine Machbarkeitsstudie zur Reformierung der Internetseiten dar.
-Als damals das heute gängige Protokoll für Internetseiten (html, http) entworfen wurde,
-war das Paradigma eine fast statische Dokumentensicht.
+Als damals das heute gängige Protokoll für Internetseiten (html, http) entworfen wurde, war das Paradigma eine fast statische Dokumentensicht.
 Man wollte wissenschaftliche Texte betrachten.
-Da jeder wissenschaftlicher Text Verweise auf andere wissenschaftliche Texte hat, sind dafür Links eingeführt worden.
+Da jeder wissenschaftliche Text Verweise auf andere wissenschaftliche Texte hat, sind dafür Links eingeführt worden.
 Um wissenschaftliche Texte kommentieren zu können, sind Formulare eingeführt worden.
 Heute hat sich das Paradigma der Internetseiten geändert.
 Man erwartet im Browser eine App.
-Für dieses Paradigma ist dieses Projekt entstanden.
+Für dieses geänderte Paradigma ist dieses Projekt entstanden.
 Dazu laufen lokal ein GuiServer und ein HTML-Renderer.
 Der GuiServer verwaltet Bedien- und Ansichtselemente einer Anwendung (Button, Textfeld, Textbereich, Bild, usw.).
 Statt wie bisher eine HTML-Seite als Ganzes zu rendern, wird jedes Bedien-und Ansichtselement für sich in HTML beschrieben und gerendert.
 Die Elemente sind in Ebenen angeordnet und können pixelgenau positioniert werden.
 Der GuiServer kann sowohl lokal als auch Remote angesprochen werden.
-Eine Anwendung kann programmiert werden wie eine Desktop-Anwendung.
-Wenn auf allen gängigen Plattformen (Windows, Linux, MacOs, iOS, Android jeweils ein GuiServer und ein HTML-Renderer installiert ist, können Anwendungen plattformunabhängig entwickelt werden.
+Somit kann eine Anwendung kann programmiert wie eine Desktop-Anwendung programmiert werden.
+Wenn auf allen gängigen Plattformen (Windows, Linux, MacOs, iOS, Android) jeweils ein GuiServer und ein HTML-Renderer installiert sind, können Anwendungen plattformunabhängig entwickelt werden.
 
 *Übersicht*
 
