@@ -73,11 +73,29 @@ Hierfür ist ist in der Document Root des WebServers (z.B. _htdocs_ unter _xampp
 Getestet wurde für Windows Build 1.8.0_73, Linux Build 1.8.0_201 und Mac Build 1.8.0_202.
 Im aktuellen Entwicklungsstand muss lokal zunächst der GuiServer, dann der GuiAdapter gestartet werden. Remote, d.h. auf Server-Seite, muss zunächst die Remote-Anwendung (hier ServerDemo1) gestartet werden, dann der GuiAppServer. Die lokalen Anwendungen (hier ClientDemo1 und ClientDemo2) sind im aktuellen Entwicklungsstand nach dem GuiServer zu starten.
 
+---------------------------
 
 <h1>The Cloud App Server System (ClApSeSy)</h1>
 
 *Run applications with graphical user interface in the cloud/remote*
 
+*Introduction*
+
+This project represents a feasibility study for reforming Internet pages.
+At that time, when the now common protocol for Internet pages (html, http) was designed, the paradigm was an almost static document view.
+The intention was to view scientific texts.
+Since every scientific text has references to other scientific texts, links were introduced for this purpose.
+To be able to comment on scientific texts, forms have been introduced.
+Today, the paradigm of web pages has changed.
+People expect an app in the browser.
+This project was created for this changed paradigm.
+For this purpose a GuiServer and a HTML renderer are running locally.
+The GuiServer manages control and view elements of an application (button, text field, text area, image, etc.).
+Instead of rendering an HTML page as a whole, each control and view element is described and rendered separately in HTML.
+The elements are arranged in layers and can be positioned with pixel accuracy.
+The GuiServer can be addressed locally as well as remotely.
+Thus an application can be programmed like a desktop application.
+If a GuiServer and an HTML renderer are installed on each of the common platforms (Windows, Linux, MacOs, iOS, Android), applications can be developed platform-independently.
 
 *Overwiev*
 
@@ -94,7 +112,7 @@ GuiServer, GuiAppServer and GuiAdapter are described in more detail in separate 
 
 In addition, three demo applications are available: Two client applications for local operation and one application for remote operation.
 
-Reasons for the development of the CASS:
+Reasons for the development of the Cloud App Server System:
 
 <ul>
 <li>Application view:</li>
