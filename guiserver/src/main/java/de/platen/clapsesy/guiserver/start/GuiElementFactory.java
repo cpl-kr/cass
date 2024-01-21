@@ -1,7 +1,6 @@
 package de.platen.clapsesy.guiserver.start;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Base64;
 
 import de.platen.clapsesy.guiserver.exception.GuiServerException;
@@ -15,11 +14,11 @@ import de.platen.clapsesy.guiserver.frontend.Y;
 import de.platen.clapsesy.guiserver.frontend.Zeichnungsnummer;
 import de.platen.clapsesy.guiserver.frontend.guielement.Event;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElement;
-import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementBrowser;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementButton;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementContent;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementFlaeche;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementKlick;
+import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementScrollbalken;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementSelect;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementSlider;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElementTextInput;
@@ -36,12 +35,14 @@ import de.platen.clapsesy.guiserver.frontend.guielement.images.ImagesSlider;
 import de.platen.clapsesy.guiserver.frontend.guielement.images.ImagesTextInput;
 import de.platen.clapsesy.guiserver.renderer.HtmlRenderEngine;
 import de.platen.clapsesy.guiserver.schema.ElementType;
+import de.platen.clapsesy.guiserver.schema.ElementflaecheType;
+import de.platen.clapsesy.guiserver.schema.ScrollType;
+import de.platen.clapsesy.guiserver.schema.ScrollbalkenType;
 import de.platen.clapsesy.guiserver.schema.SliderDraggType;
 import de.platen.clapsesy.guiserver.schema.SourceType;
 import de.platen.clapsesy.guiserver.schema.StartflaecheType;
 import de.platen.clapsesy.guiserver.schema.StateType;
 import de.platen.lib.zahl.GanzzahlPositiv;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public final class GuiElementFactory {
@@ -53,7 +54,7 @@ public final class GuiElementFactory {
             guiElementVerwaltungOperation
                     .addGuiElement(createGuiElement(element, htmlRenderEngine, elementVerwaltungOperation));
         }
-        // TODO Scrollbalken
+        behandleScrollbalken(startflaecheType.getElementflaeche(), htmlRenderEngine);
         elementVerwaltungOperation.addGuiElement(new GuiElementFlaeche(new ElementId(""),
                 new Ebene(new GanzzahlPositiv(1)), new Zeichnungsnummer(new GanzzahlPositiv(1)),
                 new X(startflaecheType.getPosition().getXPosition().intValue()),
@@ -125,7 +126,7 @@ public final class GuiElementFactory {
     private GuiElement createGuiElementElementflaeche(final ElementType element,
             final HtmlRenderEngine htmlRenderEngine, final ImageView imageView,
             final GuiElementVerwaltungOperation guiElementVerwaltungOperation) {
-        // TODO Scrollbalken
+        behandleScrollbalken(element.getElementtyp().getElementflaeche(), htmlRenderEngine);
         for (final ElementType einzelelement : element.getElementtyp().getElementflaeche().getElement()) {
             guiElementVerwaltungOperation
                     .addGuiElement(createGuiElement(einzelelement, htmlRenderEngine, guiElementVerwaltungOperation));
@@ -139,16 +140,16 @@ public final class GuiElementFactory {
                 new Height(element.getPosition().getHeight().intValue()), guiElementVerwaltungOperation);
     }
 
-    private GuiElement creatGuiElementBrowser(final ElementType element) {
-        return new GuiElementBrowser(new ElementId(element.getID()),
-                new Ebene(new GanzzahlPositiv(element.getEbene().intValue())),
-                new Zeichnungsnummer(new GanzzahlPositiv(element.getZeichnungsnummer().intValue())),
-                new X(element.getPosition().getXPosition().intValue()),
-                new Y(element.getPosition().getYPosition().intValue()),
-                new Width(element.getPosition().getWidth().intValue()),
-                new Height(element.getPosition().getHeight().intValue()),
-                element.getElementtyp().getContent().getURL());
-    }
+    // private GuiElement creatGuiElementBrowser(final ElementType element) {
+    // return new GuiElementBrowser(new ElementId(element.getID()),
+    // new Ebene(new GanzzahlPositiv(element.getEbene().intValue())),
+    // new Zeichnungsnummer(new GanzzahlPositiv(element.getZeichnungsnummer().intValue())),
+    // new X(element.getPosition().getXPosition().intValue()),
+    // new Y(element.getPosition().getYPosition().intValue()),
+    // new Width(element.getPosition().getWidth().intValue()),
+    // new Height(element.getPosition().getHeight().intValue()),
+    // element.getElementtyp().getContent().getURL());
+    // }
 
     private static GuiElementContent createGuiElementContent(final ElementType element,
             final HtmlRenderEngine htmlRenderEngine, final ImageView imageView) {
@@ -354,29 +355,29 @@ public final class GuiElementFactory {
         return null;
     }
 
-    private static Image createImage(final ElementType element, final SourceType sourceType,
-            final HtmlRenderEngine htmlRenderEngine, final String path) {
-        if (sourceType.getURL() != null) {
-            final String urlString = sourceType.getURL();
-            return new Image(htmlRenderEngine.renderPng(urlString, element.getPosition().getWidth().intValue(),
-                    element.getPosition().getHeight().intValue()));
-        }
-        if (sourceType.getFile() != null) {
-            final String file = path + sourceType.getFile();
-            try {
-                return new Image(htmlRenderEngine.renderPng(new File(file), element.getPosition().getWidth().intValue(),
-                        element.getPosition().getHeight().intValue()));
-            } catch (final IOException e) {
-                throw new GuiServerException(e);
-            }
-        }
-        if (sourceType.getHtmlBase64() != null) {
-            final byte[] dataBytes = sourceType.getHtmlBase64();
-            return new Image(htmlRenderEngine.renderPng(dataBytes, element.getPosition().getWidth().intValue(),
-                    element.getPosition().getHeight().intValue()));
-        }
-        return null;
-    }
+    // private static Image createImage(final ElementType element, final SourceType sourceType,
+    // final HtmlRenderEngine htmlRenderEngine, final String path) {
+    // if (sourceType.getURL() != null) {
+    // final String urlString = sourceType.getURL();
+    // return new Image(htmlRenderEngine.renderPng(urlString, element.getPosition().getWidth().intValue(),
+    // element.getPosition().getHeight().intValue()));
+    // }
+    // if (sourceType.getFile() != null) {
+    // final String file = path + sourceType.getFile();
+    // try {
+    // return new Image(htmlRenderEngine.renderPng(new File(file), element.getPosition().getWidth().intValue(),
+    // element.getPosition().getHeight().intValue()));
+    // } catch (final IOException e) {
+    // throw new GuiServerException(e);
+    // }
+    // }
+    // if (sourceType.getHtmlBase64() != null) {
+    // final byte[] dataBytes = sourceType.getHtmlBase64();
+    // return new Image(htmlRenderEngine.renderPng(dataBytes, element.getPosition().getWidth().intValue(),
+    // element.getPosition().getHeight().intValue()));
+    // }
+    // return null;
+    // }
 
     private static HtmlInput createHtmlInput(final String base64Before, final String base64After) {
         return new HtmlInput(new String(Base64.getDecoder().decode(base64Before)),
@@ -389,5 +390,39 @@ public final class GuiElementFactory {
         }
         return new SliderDragg(sliderDraggType.getRangePlus().intValue(), sliderDraggType.getRangeMinus().intValue(),
                 sliderDraggType.getStepSize().intValue(), sliderDraggType.getMoveCount().intValue());
+    }
+
+    private static void behandleScrollbalken(final ElementflaecheType elementflaecheType,
+            final HtmlRenderEngine htmlRenderEngine) {
+        final ScrollType scrollType = elementflaecheType.getScrollbalken();
+        final GuiElementScrollbalken guiElementScrollbalkenHorizontal = createGuiElementScrollbalken(
+                elementflaecheType.getScrollbalkenHorizontal(), htmlRenderEngine);
+        final GuiElementScrollbalken guiElementScrollbalkenVertikal = createGuiElementScrollbalken(
+                elementflaecheType.getScrollbalkenVertikal(), htmlRenderEngine);
+    }
+
+    private static GuiElementScrollbalken createGuiElementScrollbalken(final ScrollbalkenType scrollbalkenType,
+            final HtmlRenderEngine htmlRenderEngine) {
+        scrollbalkenType.getBreite();
+        scrollbalkenType.getScrollteilMinimal();
+        final ImageView imageViewScroll = null;
+        final ElementType elementTypeScroll = new ElementType();
+        elementTypeScroll.getElementtyp().setSlider(scrollbalkenType.getScrollteil());
+        final GuiElementSlider guiElementSlider = createGuiElementSlider(elementTypeScroll, htmlRenderEngine,
+                imageViewScroll);
+        final ImageView imageViewContent = null;
+        final ElementType elementTypeHintergrund = new ElementType();
+        elementTypeHintergrund.getElementtyp().setContent(scrollbalkenType.getHintergrund());
+        final GuiElementContent guiElemenContent = createGuiElementContent(elementTypeHintergrund, htmlRenderEngine,
+                imageViewContent);
+        final ElementId elementId = null;
+        final Ebene ebene = null;
+        final Zeichnungsnummer zeichnungsnummer = null;
+        final X x = null;
+        final Y y = null;
+        final Width width = null;
+        final Height height = null;
+        return new GuiElementScrollbalken(elementId, ebene, zeichnungsnummer, x, y, width, height, guiElemenContent,
+                guiElementSlider);
     }
 }

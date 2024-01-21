@@ -17,12 +17,6 @@ import de.platen.clapsesy.guiserver.websocket.WebSocketClientRenderer;
 import de.platen.clapsesy.guiserver.websocket.WebSocketGuiServer;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GuiServer extends Application {
@@ -99,21 +93,21 @@ public class GuiServer extends Application {
         return websocketGuiServer;
     }
 
-    private static Stage erzeugeStartfenster(final int x, final int y, final int breiteScene, final int hoeheScene,
-            final String titel, final String text) {
-        final Text textFeld = new Text(text);
-        textFeld.setFont(Font.font(null, FontWeight.BOLD, 15));
-        textFeld.setFill(Color.CRIMSON);
-        final StackPane layout = new StackPane();
-        layout.getChildren().add(textFeld);
-        final Scene scene = new Scene(layout, breiteScene, hoeheScene);
-        final Stage window = new Stage();
-        window.setTitle(titel);
-        window.setScene(scene);
-        window.setX(x);
-        window.setY(y);
-        window.setIconified(true);
-        window.show();
-        return window;
-    }
+    // private static Stage erzeugeStartfenster(final int x, final int y, final int breiteScene, final int hoeheScene,
+    // final String titel, final String text) {
+    // final Text textFeld = new Text(text);
+    // textFeld.setFont(Font.font(null, FontWeight.BOLD, 15));
+    // textFeld.setFill(Color.CRIMSON);
+    // final StackPane layout = new StackPane();
+    // layout.getChildren().add(textFeld);
+    // final Scene scene = new Scene(layout, breiteScene, hoeheScene);
+    // final Stage window = new Stage();
+    // window.setTitle(titel);
+    // window.setScene(scene);
+    // window.setX(x);
+    // window.setY(y);
+    // window.setIconified(true);
+    // window.show();
+    // return window;
+    // }
 }

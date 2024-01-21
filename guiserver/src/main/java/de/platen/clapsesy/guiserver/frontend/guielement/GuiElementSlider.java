@@ -9,7 +9,6 @@ import de.platen.clapsesy.guiserver.frontend.X;
 import de.platen.clapsesy.guiserver.frontend.Y;
 import de.platen.clapsesy.guiserver.frontend.Zeichnungsnummer;
 import de.platen.clapsesy.guiserver.frontend.eventhandler.EventHandlerMouse;
-import de.platen.clapsesy.guiserver.frontend.eventhandler.EventHandlerMouseClicked;
 import de.platen.clapsesy.guiserver.frontend.eventhandler.EventHandlerMouseDragged;
 import de.platen.clapsesy.guiserver.frontend.eventhandler.EventHandlerMouseEntered;
 import de.platen.clapsesy.guiserver.frontend.eventhandler.EventHandlerMouseExited;
@@ -95,14 +94,15 @@ public class GuiElementSlider extends GuiElement {
         return sliderDraggY;
     }
 
-    private static EventHandlerMouseClicked getEventHandlerMouseClicked(final EventHandlerMouse... eventHandlerMouses) {
-        for (final EventHandlerMouse eventHandlerMouse : eventHandlerMouses) {
-            if (eventHandlerMouse instanceof EventHandlerMouseClicked) {
-                return (EventHandlerMouseClicked) eventHandlerMouse;
-            }
-        }
-        throw new GuiServerException("Keinen passenden EventHandler gefunden.");
-    }
+    // private static EventHandlerMouseClicked getEventHandlerMouseClicked(final EventHandlerMouse...
+    // eventHandlerMouses) {
+    // for (final EventHandlerMouse eventHandlerMouse : eventHandlerMouses) {
+    // if (eventHandlerMouse instanceof EventHandlerMouseClicked) {
+    // return (EventHandlerMouseClicked) eventHandlerMouse;
+    // }
+    // }
+    // throw new GuiServerException("Keinen passenden EventHandler gefunden.");
+    // }
 
     private static EventHandlerMouseEntered getEventHandlerMouseEntered(final EventHandlerMouse... eventHandlerMouses) {
         for (final EventHandlerMouse eventHandlerMouse : eventHandlerMouses) {

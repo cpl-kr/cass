@@ -7,14 +7,16 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.platen.clapsesy.guiserver.frontend.eventhandler.EventHandlerMouse;
+import de.platen.clapsesy.guiserver.frontend.guielement.State;
+import de.platen.clapsesy.guiserver.frontend.guielement.View;
+import de.platen.clapsesy.guiserver.frontend.guielement.images.ImageCache;
+import javafx.scene.Group;
+import javafx.scene.image.ImageView;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import de.platen.clapsesy.guiserver.exception.GuiServerException;
-import de.platen.clapsesy.guiserver.frontend.Ebene;
-import de.platen.clapsesy.guiserver.frontend.ElementId;
-import de.platen.clapsesy.guiserver.frontend.GuiElementVerwaltung;
-import de.platen.clapsesy.guiserver.frontend.Zeichnungsnummer;
 import de.platen.clapsesy.guiserver.frontend.guielement.GuiElement;
 import de.platen.lib.zahl.GanzzahlPositiv;
 
@@ -185,7 +187,7 @@ public class GuiElementVerwaltungTest {
     }
 
     private GuiElement mockGuiElement(final int ebene, final int zeichnungsnummer) {
-        final GuiElement guiElement = Mockito.mock(GuiElement.class);
+        final GuiElementTest guiElement = Mockito.mock(GuiElementTest.class);
         Mockito.when(guiElement.getEbene()).thenReturn(new Ebene(new GanzzahlPositiv(ebene)));
         Mockito.when(guiElement.getZeichnungsnummer())
                 .thenReturn(new Zeichnungsnummer(new GanzzahlPositiv(zeichnungsnummer)));
@@ -196,6 +198,43 @@ public class GuiElementVerwaltungTest {
 
         public Map<Ebene, Map<Zeichnungsnummer, GuiElement>> getElemente() {
             return elemente;
+        }
+    }
+
+    private class GuiElementTest extends GuiElement {
+
+        public GuiElementTest(ElementId elementId, Ebene ebene, Zeichnungsnummer zeichnungsnummer, X x, Y y, Width width, Height height) {
+            super(elementId, ebene, zeichnungsnummer, x, y, width, height);
+        }
+
+        @Override
+        public void handleNewActualState(State state) {
+
+        }
+
+        @Override
+        public void setImage(View view, ImageCache image) {
+
+        }
+
+        @Override
+        public void addInitialFrontView(Group group) {
+
+        }
+
+        @Override
+        public void setInitialEventHandlerMouse(EventHandlerMouse... eventHandlerMouses) {
+
+        }
+
+        @Override
+        public void setImage(EventHandlerMouse eventHandlerMouse, State state) {
+
+        }
+
+        @Override
+        public ImageView getImageVieww() {
+            return null;
         }
     }
 }
