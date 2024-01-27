@@ -1,4 +1,60 @@
-English version below
+<h1>The Cloud App Server System (ClApSeSy)</h1>
+
+*Run applications with graphical user interface in the cloud/remote*
+
+
+*Overwiev*
+
+This system consists of several interconnected components.
+One of the components, the _GuiServer_, runs on the local machine and handles the representation of graphical user interfaces with their interactions by mouse and keyboard..
+The GuiServer is connected to another component, the _GuiAdapter_.
+This GuiAdapter also runs locally.
+With this GuiAdapter you can specify a kind of address similar to an internet address.
+In addition to the GuiServer, the GuiAdapter is connected to another component, the _GuiAppServer_.
+The GuiAppServer is a component that runs remotely or in the cloud and manages instances of applications running remotely or in the cloud.
+This allows remote applications to control local graphical user interfaces.
+
+GuiServer, GuiAppServer and GuiAdapter are described in more detail in separate documents.
+
+In addition, three demo applications are available: Two client applications for local operation and one application for remote operation.
+
+Reasons for the development of the CASS:
+
+<ul>
+<li>Application view:</li>
+<ul>
+<li>No longer restricted to the browser</li>
+<li>Possibility to design with HTML and CSS</li>
+<li>No local installation of applications necessary, as long as no local resources from memory and screen are used</li>
+<li>Platform independent</li>
+</ul>
+<li>Software development view:</li>
+<ul>
+<li>Software development not necessary via "script bridges"</li>
+<li>No separate web framework necessary for Software development</li>
+<li>Software development with programming languages of your choice</li>
+<li>Loose coupling of the Gui via a protocol, no Gui framework required for a development environment anymore</li>
+<li>HTML and CSS design options for the graphical user interface</li>
+<li>No operating system dependent style of the user interface</li>
+<li>No "pure pressing" of applications into a document view for which the previous technology is designed (synchronous sequence of request - response)</li>
+<li>Safer</li>
+</ul>
+</ul>
+
+
+*Installation und Start of the system (folder _binary_):*
+
+The _binary_ directory contains the execution files in the _GuiServer_, _GuiAdapter_, _GuiAppServer_, _ClientDemo1_, _ClientDemo2_, _ServerDemo1_ directories.
+Depending on the platform, the files must be started with the extensions _.bat_, _.sh_, _.command_ (folder _win_, _lin_, _mac_).
+These files contain placeholder of paths to Java 8 runtime environments.
+The associated Java runtime environments for Java 8 must be installed separately.
+The path specification for _cd_ in the files with the extension _.command_ serves as an example.
+It was tested for Windows Build 1.8.0_73, Linux Build 1.8.0_201 and Mac Build 1.8.0_202.
+The configuration expects a running web server under _localhost:8080_.
+To do this, create a directory _clapsesy_ in the document root of the web server (e.g. _htdocs_ under _xampp_) and copy the directory _GuiElementPages_ into it.
+In the current development state, the GuiServer must be started locally first, then the GuiAdapter. Remote, i.e. on the server side, first the remote application (here ServerDemo1) must be started, then the GuiAppServer. The local applications (here ClientDemo1 and ClientDemo2) must be started after the GuiServer in the current development status.
+
+
 
 <h1>Das Cloud App Server System (ClApSeSy)</h1>
 
