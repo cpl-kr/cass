@@ -1,13 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.platen.guiserver</groupId>
-	<artifactId>de.platen.guiserver</artifactId>
-	<version>2.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
-	<properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.platen.guiserver</groupId>
+  <artifactId>de.platen.guiserver</artifactId>
+  <version>1.0.1</version>
+  <packaging>jar</packaging>
+  
+  	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -17,132 +15,115 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>2.3.1</version>
 				<configuration>
-					<release>11</release>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.14.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemas>
+                        <schema>
+                            <fileset>
+                                <!-- <directory>${basedir}/src/main/resources/xsd</directory> -->
+                                <directory>src/main/resources/xsd</directory>
+                            </fileset>
+                        </schema>
+                    </schemas>
+                    <generatePackage>de.platen.cass.guiserver.schema</generatePackage>
+                    <episode>false</episode>
+                </configuration>
+            </plugin>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.14.0</version>
-				<executions>
-					<execution>
-						<id>generate-sources</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<schemas>
-						<schema>
-							<fileset>
-								<directory>src/main/resources/xsd</directory>
-							</fileset>
-						</schema>
-					</schemas>
-					<generatePackage>de.platen.clapsesy.guiserver.schema</generatePackage>
-					<episode>false</episode>
-				</configuration>
-			</plugin>
+        		<groupId>org.codehaus.mojo</groupId>
+        		<artifactId>build-helper-maven-plugin</artifactId>
+        		<version>1.7</version>
+        		<executions>
+          			<execution>
+            			<id>add-source</id>
+            			<phase>generate-sources</phase>
+            			<goals>
+              				<goal>add-source</goal>
+            			</goals>
+            			<configuration>
+              				<sources>
+                				<source>${basedir}/target/generated-sources/xjc</source>
+			              </sources>
+            			</configuration>
+          			</execution>
+        		</executions>
+      		</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>${basedir}/target/generated-sources/xjc</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<archive>
-								<manifest>
-									<mainClass>de.platen.clapsesy.guiserver.start.GuiServer</mainClass>
-								</manifest>
-							</archive>
-							<descriptorRefs>
-								<descriptorRef>jar-with-dependencies</descriptorRef>
-							</descriptorRefs>
-							<finalName>GuiServer-${project.version}</finalName>
-							<appendAssemblyId>false</appendAssemblyId>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.2.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>de.platen.clapsesy.guiserver.Main</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</execution>
-				</executions>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-assembly-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <phase>package</phase>
+			            <goals>
+			                <goal>single</goal>
+			            </goals>
+			            <configuration>
+			                <archive>
+			                <manifest>
+			                    <mainClass>de.platen.cass.guiserver.start.GuiServer</mainClass>
+			                </manifest>
+			                </archive>
+			                <descriptorRefs>
+			                    <descriptorRef>jar-with-dependencies</descriptorRef>
+			                </descriptorRefs>
+			                <finalName>GuiServer-${project.version}</finalName>
+			                <appendAssemblyId>false</appendAssemblyId>			                
+			            </configuration>
+			        </execution>
+			    </executions>
 			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.9.0</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.9.0</version>
-			<scope>test</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-params</artifactId>
-			<version>5.9.0</version>
-			<scope>test</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.6.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-suite</artifactId>
-			<version>1.9.0</version>
-			<scope>test</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>1.6.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-			<version>5.9.0</version>
-			<scope>test</scope>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.3.12</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.3.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -172,76 +153,45 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>4.11.0</version>
-			<scope>test</scope>
+			<version>1.9.5</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-inline</artifactId>
-			<version>4.10.0</version>
-			<scope>test</scope>
+		    <groupId>net.sf.cssbox</groupId>
+		    <artifactId>cssbox</artifactId>
+		    <version>4.14</version>
+		</dependency>
+		<!--
+		<dependency>
+		    <groupId>net.sf.cssbox</groupId>
+		    <artifactId>cssbox</artifactId>
+		    <version>4.15-SNAPSHOT</version>
+		</dependency>
+		-->
+		<dependency>
+		  <groupId>org.java-websocket</groupId>
+		  <artifactId>Java-WebSocket</artifactId>
+		  <version>1.5.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>4.10.0</version>
-			<scope>test</scope>
+		    <groupId>commons-cli</groupId>
+		    <artifactId>commons-cli</artifactId>
+		    <version>1.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.java-websocket</groupId>
-			<artifactId>Java-WebSocket</artifactId>
-			<version>1.5.0</version>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-controls</artifactId>
+		    <version>12-ea+8</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-cli</groupId>
-			<artifactId>commons-cli</artifactId>
-			<version>1.4</version>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-base</artifactId>
+		    <version>12-ea+8</version>
 		</dependency>
 		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20201115</version>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-graphics</artifactId>
+		    <version>12-ea+8</version>
 		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.15</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-controls</artifactId>
-			<version>12-ea+8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-base</artifactId>
-			<version>12-ea+8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-graphics</artifactId>
-			<version>12-ea+8</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.activation</groupId>
-			<artifactId>javax.activation</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-core</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-	</dependencies>
-
+ 	</dependencies>
+  
 </project>
