@@ -1,4 +1,4 @@
-package de.platen.htmlrenderer;
+package de.platen.htmlrenderer.core;
 
 import java.awt.Dimension;
 import java.io.ByteArrayInputStream;
@@ -11,6 +11,7 @@ import java.nio.file.Files;
 
 import javax.imageio.ImageIO;
 
+import de.platen.htmlrenderer.api.HtmlRenderer;
 import org.fit.cssbox.css.CSSNorm;
 import org.fit.cssbox.css.DOMAnalyzer;
 import org.fit.cssbox.io.DOMSource;
@@ -24,8 +25,9 @@ import org.xml.sax.SAXException;
 
 import cz.vutbr.web.css.MediaSpec;
 
-public class HtmlRenderer {
+public class HtmlRendererImpl implements HtmlRenderer {
 
+    @Override
     public byte[] renderPng(String urlString, final int width, final int height) throws IOException {
         if (!urlString.startsWith("http:") //
                 && !urlString.startsWith("https:") //
@@ -40,12 +42,14 @@ public class HtmlRenderer {
         return byteArrayOutputStream.toByteArray();
     }
 
+    @Override
     public byte[] renderPng(final File file, final int width, final int height) throws IOException {
         System.out.println("Rendern von Datei " + file.getName());
         final byte[] data = Files.readAllBytes(file.toPath());
         return this.renderPng(data, width, height);
     }
 
+    @Override
     public byte[] renderPng(final byte[] data, final int width, final int height) throws IOException {
         System.out.println("Rendern von Html-Daten:");
         System.out.println(new String(data));

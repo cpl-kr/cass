@@ -1,6 +1,4 @@
-package de.platen.htmlrenderer;
-
-import java.net.InetSocketAddress;
+package de.platen.htmlrenderer.core;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -29,10 +27,7 @@ public class Main {
         }
         System.out.println("Host: " + host);
         System.out.println("Port: " + port);
-        final HtmlRenderer htmlRenderer = new HtmlRenderer();
-        final Thread thread = new Thread(
-                new WebSocketServerHtmlRenderer(new InetSocketAddress(host, port), htmlRenderer));
-        thread.start();
-        Thread.sleep(3000);
+        HtmlRendererService htmlRendererService = new HtmlRendererService();
+        htmlRendererService.start(host, port);
     }
 }
