@@ -23,7 +23,7 @@ public class Parsererzeugung {
             "WortUrl \"Url\"\n" +
             "Zahl [09]\n" +
             "Base64 <[A-Za-z0-9+=]+>\n" +
-            "Adresse <(http|https)://[-\\w]+(\\.\\w[-\\w]*)+>\n";
+            "Adresse <^https?:\\/\\/([a-zA-Z0-9]+\\.)?[a-zA-Z0-9]+\\.[a-zA-Z0-9]+(?:\\/.*)?$>\n";
 
     public Parser erzeugeParser() {
         final GrammatikAufbau grammatikAufbau = new GrammatikAufbau();
