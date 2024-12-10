@@ -17,6 +17,7 @@ import static java.util.Objects.requireNonNull;
 
 public class WebSocketServerHtmlRenderer extends WebSocketServer {
 
+    private static final int ANZAHL_ELEMENTE = 8;
     private static final String VERSION = "1.0.0";
     private static final String BREITE = "Breite";
     private static final String URL = "Url";
@@ -68,7 +69,7 @@ public class WebSocketServerHtmlRenderer extends WebSocketServer {
         System.out.println(WEB_SOCKET_SERVER_HTML_RENDERER_ON_START);
     }
 
-    private void bearbeiteMessage(WebSocket conn, String message) {
+    private void bearbeiteMessage(final WebSocket conn, final String message) {
         if (message.isBlank()) {
             conn.send(TEXT_IST_LEER_ODER_ENTHAELT_NUR_WHITESPACES);
             return;
@@ -80,29 +81,34 @@ public class WebSocketServerHtmlRenderer extends WebSocketServer {
             }
         }
         List<SyntaxpfadMitWort> syntaxpfadeMitWort = parser.ermittleSyntaxpfadeMitWort(true);
-        if (!VERSION.equals(syntaxpfadeMitWort.get(0).getWort())) {
+        if (syntaxpfadeMitWort.size() != ANZAHL_ELEMENTE) {
+            conn.send(FEHLER_BEIM_PARSEN);
+            return;
+        }
+        if (!VERSION.equals(syntaxpfadeMitWort.get(1).getWort())) {
             conn.send(VERSION_IST_NICHT_1_0_0);
             return;
         }
-        String wort1 = syntaxpfadeMitWort.get(1).getWort();
-        String wort2 = syntaxpfadeMitWort.get(2).getWort();
+        String wort = syntaxpfadeMitWort.get(2).getWort();
+        String wert1 = syntaxpfadeMitWort.get(3).getWort();
+        String wert2 = syntaxpfadeMitWort.get(5).getWort();
         int breite;
         int hoehe;
-        if (BREITE.equals(syntaxpfadeMitWort.get(1).getSyntaxpfad().gebeKnotenfolge().get(2).getSymbolbezeichnung().getSymbolbezeichnung())) {
-            breite = Integer.parseInt(wort1);
-            hoehe = Integer.parseInt(wort2);
+        if (BREITE.equals(wort)) {
+            breite = Integer.parseInt(wert1);
+            hoehe = Integer.parseInt(wert2);
         } else {
-            hoehe = Integer.parseInt(wort1);
-            breite = Integer.parseInt(wort2);
+            hoehe = Integer.parseInt(wert2);
+            breite = Integer.parseInt(wert1);
         }
         behandleRendern(conn, syntaxpfadeMitWort, breite, hoehe);
     }
 
-    private void behandleRendern(WebSocket conn, List<SyntaxpfadMitWort> syntaxpfadeMitWort, int breite, int hoehe) {
-        String wort = syntaxpfadeMitWort.get(3).getWort();
+    private void behandleRendern(final WebSocket conn, final List<SyntaxpfadMitWort> syntaxpfadeMitWort, final int breite, final int hoehe) {
+        String wort = syntaxpfadeMitWort.get(6).getWort();
         String url = "";
         String html = "";
-        if (URL.equals(syntaxpfadeMitWort.get(3).getSyntaxpfad().gebeKnotenfolge().get(2).getSymbolbezeichnung().getSymbolbezeichnung())) {
+        if (URL.equals(wort)) {
             url = wort;
         } else {
             html = wort;
@@ -114,7 +120,7 @@ public class WebSocketServerHtmlRenderer extends WebSocketServer {
         }
     }
 
-    private void renderUrl(WebSocket conn, String url, int breite, int hoehe) {
+    private void renderUrl(final WebSocket conn, final String url, final int breite, final int hoehe) {
         try {
             final byte[] bild = this.htmlRenderer.renderPng(url, breite, hoehe);
             if (bild != null) {
@@ -127,7 +133,7 @@ public class WebSocketServerHtmlRenderer extends WebSocketServer {
         }
     }
 
-    private void renderHtml(WebSocket conn, String html, int breite, int hoehe) {
+    private void renderHtml(final WebSocket conn, final String html, final int breite, final int hoehe) {
         final Base64 base64 = new Base64();
         final byte[] data = base64.decode(html);
         try {
