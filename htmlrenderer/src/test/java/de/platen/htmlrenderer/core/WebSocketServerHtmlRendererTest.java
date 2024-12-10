@@ -7,7 +7,10 @@ import org.java_websocket.WebSocket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URL;
+import java.nio.ByteBuffer;
 import java.util.Base64;
 import java.util.List;
 
@@ -17,8 +20,8 @@ import static org.mockito.Mockito.*;
 public class WebSocketServerHtmlRendererTest {
 
     private static final String EINGABE_FALSCHE_VERSION = "Version 1.1.1 Breite 10 Höhe 20 Html " + Base64.getEncoder().encodeToString("<html></html>".getBytes());
-    private static final String EINGABE_HTML = "Version 1.0.0 Breite 10 Höhe 20 Html " + Base64.getEncoder().encodeToString("<html></html>".getBytes());
     private static final String EINGABE_URL = "Version 1.0.0 Breite 10 Höhe 20 Url http://localhost/test.html";
+    private static final String EINGABE_HTML = "Version 1.0.0 Breite 10 Höhe 20 Html " + Base64.getEncoder().encodeToString("<html></html>".getBytes());
 
     private WebSocketServerHtmlRenderer webSocketServerHtmlRenderer;
     private final InetSocketAddress inetSocketAddress = mock(InetSocketAddress.class);
@@ -60,19 +63,74 @@ public class WebSocketServerHtmlRendererTest {
 
     @Test
     void testFalscheVersion() {
-        List<SyntaxpfadMitWort> syntaxpfadeMitWort = ermittleSyntaxpfade(EINGABE_FALSCHE_VERSION);
+        final List<SyntaxpfadMitWort> syntaxpfadeMitWort = ermittleSyntaxpfade(EINGABE_FALSCHE_VERSION);
         when(this.parser.verarbeiteZeichen(anyChar())).thenReturn(true);
         when(this.parser.ermittleSyntaxpfadeMitWort(true)).thenReturn(syntaxpfadeMitWort);
         this.webSocketServerHtmlRenderer.onMessage(this.webSocket, EINGABE_FALSCHE_VERSION);
         verify(this.webSocket).send("Version ist nicht 1.0.0.");
     }
 
-    // TODO Test Render Url IOException
-    // TODO Test Render Url Ergebnis null
-    // TODO Test Render Url mit Ergebnis
-    // TODO Test Render Html IOException
-    // TODO Test Render Html Ergebnis null
-    // TODO Test Render Html mit Ergebnis
+    @Test
+    void testRenderUrlIOException() throws IOException {
+        final List<SyntaxpfadMitWort> syntaxpfadeMitWort = ermittleSyntaxpfade(EINGABE_URL);
+        when(this.parser.verarbeiteZeichen(anyChar())).thenReturn(true);
+        when(this.parser.ermittleSyntaxpfadeMitWort(true)).thenReturn(syntaxpfadeMitWort);
+        when(this.htmlRenderer.renderPng(anyString(), anyInt(), anyInt())).thenThrow(new IOException("Fehler"));
+        this.webSocketServerHtmlRenderer.onMessage(this.webSocket, EINGABE_URL);
+        verify(this.webSocket).send("Fehler beim Rendern bei Url: Fehler");
+    }
+
+    @Test
+    void testRenderUrlReturnNull() throws IOException {
+        final List<SyntaxpfadMitWort> syntaxpfadeMitWort = ermittleSyntaxpfade(EINGABE_URL);
+        when(this.parser.verarbeiteZeichen(anyChar())).thenReturn(true);
+        when(this.parser.ermittleSyntaxpfadeMitWort(true)).thenReturn(syntaxpfadeMitWort);
+        when(this.htmlRenderer.renderPng(anyString(), anyInt(), anyInt())).thenReturn(null);
+        this.webSocketServerHtmlRenderer.onMessage(this.webSocket, EINGABE_URL);
+        verify(this.webSocket).send("Fehler beim Rendern bei Url, (ergebnis null)");
+    }
+
+    @Test
+    void testRenderUrl() throws IOException {
+        List<SyntaxpfadMitWort> syntaxpfadeMitWort = ermittleSyntaxpfade(EINGABE_URL);
+        when(this.parser.verarbeiteZeichen(anyChar())).thenReturn(true);
+        when(this.parser.ermittleSyntaxpfadeMitWort(true)).thenReturn(syntaxpfadeMitWort);
+        byte[] bild = {0x01, 0x02, 0x03};
+        when(this.htmlRenderer.renderPng(anyString(), anyInt(), anyInt())).thenReturn(bild);
+        this.webSocketServerHtmlRenderer.onMessage(this.webSocket, EINGABE_URL);
+        verify(this.webSocket).send(ByteBuffer.wrap(bild));
+    }
+
+    @Test
+    void testRenderHtmlIOException() throws IOException {
+        final List<SyntaxpfadMitWort> syntaxpfadeMitWort = ermittleSyntaxpfade(EINGABE_HTML);
+        when(this.parser.verarbeiteZeichen(anyChar())).thenReturn(true);
+        when(this.parser.ermittleSyntaxpfadeMitWort(true)).thenReturn(syntaxpfadeMitWort);
+        when(this.htmlRenderer.renderPng(any(byte[].class), anyInt(), anyInt())).thenThrow(new IOException("Fehler"));
+        this.webSocketServerHtmlRenderer.onMessage(this.webSocket, EINGABE_HTML);
+        verify(this.webSocket).send("Fehler beim Rendern bei html: Fehler");
+    }
+
+    @Test
+    void testRenderHtmlReturnNull() throws IOException {
+        final List<SyntaxpfadMitWort> syntaxpfadeMitWort = ermittleSyntaxpfade(EINGABE_HTML);
+        when(this.parser.verarbeiteZeichen(anyChar())).thenReturn(true);
+        when(this.parser.ermittleSyntaxpfadeMitWort(true)).thenReturn(syntaxpfadeMitWort);
+        when(this.htmlRenderer.renderPng(any(byte[].class), anyInt(), anyInt())).thenReturn(null);
+        this.webSocketServerHtmlRenderer.onMessage(this.webSocket, EINGABE_HTML);
+        verify(this.webSocket).send("Fehler beim Rendern bei html, (ergebnis null)");
+    }
+
+    @Test
+    void testRenderHtml() throws IOException {
+        List<SyntaxpfadMitWort> syntaxpfadeMitWort = ermittleSyntaxpfade(EINGABE_HTML);
+        when(this.parser.verarbeiteZeichen(anyChar())).thenReturn(true);
+        when(this.parser.ermittleSyntaxpfadeMitWort(true)).thenReturn(syntaxpfadeMitWort);
+        byte[] bild = {0x01, 0x02, 0x03};
+        when(this.htmlRenderer.renderPng(any(byte[].class), anyInt(), anyInt())).thenReturn(bild);
+        this.webSocketServerHtmlRenderer.onMessage(this.webSocket, EINGABE_HTML);
+        verify(this.webSocket).send(ByteBuffer.wrap(bild));
+    }
 
     private static List<SyntaxpfadMitWort> ermittleSyntaxpfade(final String eingabe) {
         Parsererzeugung parsererzeugung = new Parsererzeugung();
