@@ -1,6 +1,6 @@
-package de.platen.htmlrenderer.core;
+package de.platen.clapsesy.htmlrenderer.core;
 
-import de.platen.htmlrenderer.api.HtmlRenderer;
+import de.platen.clapsesy.htmlrenderer.api.HtmlRenderer;
 import de.platen.syntaxparser.Parser;
 
 import java.net.InetSocketAddress;

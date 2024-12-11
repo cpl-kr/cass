@@ -1,4 +1,4 @@
-package de.platen.htmlrenderer.api;
+package de.platen.clapsesy.htmlrenderer.api;
 
 import java.io.File;
 import java.io.IOException;

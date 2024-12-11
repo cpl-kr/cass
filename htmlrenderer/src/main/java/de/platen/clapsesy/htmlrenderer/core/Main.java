@@ -1,4 +1,4 @@
-package de.platen.htmlrenderer.core;
+package de.platen.clapsesy.htmlrenderer.core;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;

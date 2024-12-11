@@ -1,4 +1,4 @@
-package de.platen.htmlrenderer.core;
+package de.platen.clapsesy.htmlrenderer.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

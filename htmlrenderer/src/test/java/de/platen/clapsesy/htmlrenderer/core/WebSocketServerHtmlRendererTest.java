@@ -1,4 +1,4 @@
-package de.platen.htmlrenderer.core;
+package de.platen.clapsesy.htmlrenderer.core;
 
 import de.platen.syntaxparser.Parser;
 
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Base64;
 import java.util.List;

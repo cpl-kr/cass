@@ -1,11 +1,11 @@
-package de.platen.htmlrenderer.core;
+package de.platen.clapsesy.htmlrenderer.core;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.util.List;
 
-import de.platen.htmlrenderer.api.HtmlRenderer;
+import de.platen.clapsesy.htmlrenderer.api.HtmlRenderer;
 import de.platen.syntaxparser.Parser;
 import de.platen.syntaxparser.syntaxpfad.SyntaxpfadMitWort;
 import org.apache.commons.codec.binary.Base64;

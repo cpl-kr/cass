@@ -1,4 +1,4 @@
-package de.platen.htmlrenderer.core;
+package de.platen.clapsesy.htmlrenderer.core;
 
 import java.awt.Dimension;
 import java.io.ByteArrayInputStream;
@@ -11,7 +11,7 @@ import java.nio.file.Files;
 
 import javax.imageio.ImageIO;
 
-import de.platen.htmlrenderer.api.HtmlRenderer;
+import de.platen.clapsesy.htmlrenderer.api.HtmlRenderer;
 import org.fit.cssbox.css.CSSNorm;
 import org.fit.cssbox.css.DOMAnalyzer;
 import org.fit.cssbox.io.DOMSource;

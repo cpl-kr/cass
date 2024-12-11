@@ -1,4 +1,4 @@
-package de.platen.htmlrenderer.core;
+package de.platen.clapsesy.htmlrenderer.core;
 
 import de.platen.syntaxparser.Parser;
 import de.platen.syntaxparser.grammatik.Grammatik;
