@@ -68,7 +68,7 @@
 			<!--<groupId>com.github.cpl-kr</groupId>-->
 			<groupId>de.platen.syntaxparser</groupId>
 			<artifactId>syntaxparser</artifactId>
-			<version>2.3.1</version>
+			<version>2.4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
